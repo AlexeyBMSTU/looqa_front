@@ -7,6 +7,11 @@
 - **Vite 7.3.1**
 - **React Router DOM 7.13.1**
 
+### Библиотеки UI
+
+- **Framer-Motion 12.35.1**
+- **Ant-Design 6.3.1**
+
 ### Управление состоянием
 
 - **MobX 6.15.0**
@@ -60,4 +65,9 @@ src/
 2. Запустите сервер разработки:
    ```bash
    npm run dev
+   ```
+
+3. Скачивание пакетов:
+   ```bash
+   npm install <lib_name> --registry https://registry.npmjs.org/
    ```
