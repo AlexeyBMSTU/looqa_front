@@ -1,7 +1,7 @@
-import { CounterPage } from '@/pages/CounterPage'
-import { FC } from 'react'
-import { Routes, Route } from 'react-router-dom';
-import { CONFIG_PAGES } from './config'
+import { CounterPage } from '@/pages/counter/CounterPage';
+import { FC } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { CONFIG_PAGES } from './config';
 
 export const RouterController: FC = () => {
   return (
