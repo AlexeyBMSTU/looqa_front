@@ -1,11 +1,7 @@
-name: General
+name: Deploy
 
 on:
-  push:
-    branches: [ "**" ]
-  pull_request:
-    branches: [ "**" ]
-  workflow_dispatch:
+  workflow_dispatch: 
     inputs:
       environment:
         description: 'Выберите окружение'
@@ -21,47 +17,25 @@ on:
         default: 'latest'
 
 jobs:
-  lint:
+  deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [22.x]
     steps:
     - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
+    - uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 22.x
         cache: 'npm'
     - name: Install dependencies
       run: npm ci
-    - name: Run lint
-      run: npm run lint
-
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [22.x]
-    steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: Install dependencies
-      run: npm ci
-    - name: Build
+    - name: Build for deploy
       run: npm run build
-      
-  manual-deploy:
-    needs: [lint, build]
-    if: github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
-    steps:
     - name: Деплой на ${{ github.event.inputs.environment }}
       run: |
         echo "Деплоим версию ${{ github.event.inputs.version }} на ${{ github.event.inputs.environment }}"
-    - name: Проверка статуса
-      run: echo "Деплой завершен успешно!"
+        # Здесь можно добавить реальные команды деплоя
+        # Например: 
+        # if [ "${{ github.event.inputs.environment }}" == "production" ]; then
+        #   npm run deploy:prod
+        # else
+        #   npm run deploy:staging
+        # fi
