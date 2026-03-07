@@ -38,4 +38,8 @@ jobs:
         #   npm run deploy:prod
         # else
         #   npm run deploy:staging
+<<<<<<< HEAD
         # fi
+=======
+        # fi
+>>>>>>> 1729457 (SPRINT-1: actions)
