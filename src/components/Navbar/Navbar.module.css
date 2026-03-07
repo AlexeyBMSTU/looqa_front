@@ -1,0 +1,19 @@
+.root {
+  height: var(--navbar-padding);
+	width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+	position: fixed;
+}
+
+.icon {
+  font-size: 20px;
+}
+
+.logo {
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 20px;
+}
