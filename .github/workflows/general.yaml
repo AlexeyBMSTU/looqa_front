@@ -1,4 +1,4 @@
-name: Auto Lint & Build
+name: General
 
 on:
   push:
@@ -34,3 +34,7 @@ jobs:
       run: npm ci
     - name: Build
       run: npm run build
+    - name: Деплой начался
+      run: |
+        echo "Деплоим версию ${{ github.event.inputs.version }} на ${{ github.event.inputs.environment }}"
+        ls
