@@ -18,7 +18,6 @@ const validateUsername = (_: any, value: string) => {
   return Promise.resolve();
 };
 
-// Общие константы для правил пароля в правильном порядке
 const PASSWORD_RULES_CHECK = [
   {
     check: (value: string) => value.length >= 6,
@@ -42,13 +41,11 @@ const PASSWORD_RULES_CHECK = [
   },
 ];
 
-// Кастомный валидатор для пароля - возвращает только первую ошибку
 const validatePassword = (_: any, value: string) => {
   if (!value) {
     return Promise.reject(new Error('Пароль не должен быть пустым'));
   }
 
-  // Находим первое невыполненное правило
   const failedRule = PASSWORD_RULES_CHECK.find(rule => !rule.check(value));
 
   if (failedRule) {
@@ -58,22 +55,17 @@ const validatePassword = (_: any, value: string) => {
   return Promise.resolve();
 };
 
-// Функция для расчета силы пароля в процентах
 export const calculatePasswordStrength = (password: string): number => {
   if (!password) return 0;
 
-  // Проверяем все правила и считаем выполненные
   const totalRules = PASSWORD_RULES_CHECK.length;
   const passedRules = PASSWORD_RULES_CHECK.filter(rule =>
     rule.check(password)
   ).length;
 
-  // Возвращаем процент выполненных правил
   return Math.round((passedRules / totalRules) * 100);
 };
 
-// Правила валидации для поля имени пользователя
 export const usernameValidationRules = [{ validator: validateUsername }];
 
-// Правила валидации для поля пароля
 export const passwordValidationRules = [{ validator: validatePassword }];
