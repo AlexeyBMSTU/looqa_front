@@ -1,17 +1,10 @@
 import { InputComponent } from '@/components/Input/Input';
 import { CONFIG } from '@/router/config';
-import {
-  calculatePasswordStrength,
-  passwordValidationRules,
-  usernameValidationRules,
-} from '@/utils/validateAuth';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Flex, Form } from 'antd';
 import Title from 'antd/es/typography/Title';
-import { useState } from 'react';
 import { Link } from 'react-router';
 import styles from './LoginPage.module.css';
-import classNames from 'classnames';
 
 export const LoginPage = () => {
   const onFinish = (values: any) => {

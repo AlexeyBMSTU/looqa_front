@@ -43,8 +43,8 @@ export const RegPage = () => {
           className={classNames({
             [styles.red]: passwordStrength !== 0 && passwordStrength < 40,
             [styles.warning]: passwordStrength >= 40 && passwordStrength < 70,
-						[styles.good]: passwordStrength >= 70 && passwordStrength < 90,
-					
+						[styles.good]: passwordStrength >= 70 && passwordStrength <= 90,
+						[styles.colorTextWithUnmount]: passwordStrength === 100,
           })}
           name="password"
           rules={passwordValidationRules}
@@ -62,9 +62,9 @@ export const RegPage = () => {
           strokeColor={
             passwordStrength < 40
               ? '#ff4d4f'
-              : passwordStrength < 70
+              : passwordStrength >= 40 && passwordStrength < 70
                 ? '#faad14'
-                : '#52c41a'
+                : passwordStrength >= 70 && passwordStrength < 100 ? '#f7c052' : '#52c41a'
           }
           size="small"
           className={styles.passwordStrength}

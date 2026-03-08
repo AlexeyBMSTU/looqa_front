@@ -44,3 +44,7 @@
   color: #f7c052 !important;
   border-color: #f7c052 !important;
 }
+
+.colorTextWithUnmount :global(.ant-form-item-explain-error) {
+  color: #f7c052 !important;
+}
