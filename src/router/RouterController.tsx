@@ -1,7 +1,9 @@
+import { RouteConfig } from './BaseRouteController';
 import { FC, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { mainController } from './MainController';
 import { PageTitle } from '@/components/PageTitle/PageTitle';
+import { mainController } from './MainController'
+
 
 const NotFoundPage: FC = () => (
   <div style={{ padding: '20px', textAlign: 'center' }}>
@@ -11,7 +13,7 @@ const NotFoundPage: FC = () => (
 );
 
 export const RouterController: FC = () => {
-  const [routes, setRoutes] = useState<any[]>([]);
+  const [routes, setRoutes] = useState<RouteConfig[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
@@ -19,6 +21,8 @@ export const RouterController: FC = () => {
       try {
         const routesData = await mainController.getRoutesAsync();
         setRoutes(routesData);
+      } catch (error) {
+        console.error('Failed to load routes:', error);
       } finally {
         setIsLoading(false);
       }
@@ -33,14 +37,14 @@ export const RouterController: FC = () => {
   
   return (
     <Routes>
-      {routes.map(({ LINK, PAGE, TITLE }: any, index: number) => (
+      {routes.map((route, index) => (
         <Route
-          key={index}
-          path={LINK}
+          key={`${route.LINK}-${index}`}
+          path={route.LINK}
           element={
             <>
-              <PageTitle title={TITLE} />
-              {PAGE}
+              <PageTitle title={route.TITLE} />
+              {route.PAGE}
             </>
           }
         />

@@ -1,5 +1,19 @@
+import { ReactNode } from 'react'
 import { BaseRouteController } from './BaseRouteController';
 import { routeRegistry } from './RouteRegistry';
+
+export interface RouteConfig {
+  LINK: string;
+  PAGE: ReactNode;
+  TITLE: string;
+  [key: string]: unknown; 
+}
+
+type ControllerModule = Record<string, unknown>;
+
+type ControllerConstructor = new () => BaseRouteController;
+
+type ImportFunction = () => Promise<ControllerModule>;
 
 export class MainController extends BaseRouteController {
   private static instance: MainController;
@@ -24,13 +38,13 @@ export class MainController extends BaseRouteController {
     try {
       const controllerModules = import.meta.glob([
         '/src/pages/**/*-controller.tsx',
-      ]);
+      ]) as Record<string, ImportFunction>;
 
       const controllerPromises: Promise<BaseRouteController | null>[] = [];
 
       for (const path in controllerModules) {
         try {
-          const modulePromise = controllerModules[path]() as Promise<any>;
+          const modulePromise = controllerModules[path]() as Promise<ControllerModule>;
           controllerPromises.push(
             modulePromise
               .then(module => {
@@ -40,8 +54,9 @@ export class MainController extends BaseRouteController {
                 }
                 return null;
               })
-              .catch(error => {
-                return error;
+              .catch((error: Error) => {
+                console.error(`Failed to load controller module: ${path}`, error);
+                return null;
               })
           );
         } catch (error) {
@@ -64,24 +79,24 @@ export class MainController extends BaseRouteController {
     }
   }
 
-  private findControllerClass(module: any): (new () => BaseRouteController) | null {
+  private findControllerClass(module: ControllerModule): ControllerConstructor | null {
     for (const exportName in module) {
       const exported = module[exportName];
       if (
         typeof exported === 'function' &&
         exported.prototype instanceof BaseRouteController
       ) {
-        return exported;
+        return exported as ControllerConstructor;
       }
     }
     return null;
   }
 
-  getRoutes(): any[] {
+  getRoutes() {
     return routeRegistry.getRoutes();
   }
 
-  async getRoutesAsync(): Promise<any[]> {
+  async getRoutesAsync() {
     if (!this.isInitialized && this.initializationPromise) {
       await this.initializationPromise;
     }
