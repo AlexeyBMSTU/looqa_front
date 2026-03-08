@@ -1,0 +1,43 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 360px;
+  max-width: 100%;
+}
+
+.form {
+  width: 460px;
+}
+
+.passwordStrength {
+  margin-top: 8px;
+  height: 6px;
+}
+
+.passwordRules {
+  margin-top: 8px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 20px;
+}
+
+.green {
+  color: #52c41a;
+}
+
+.red :global(.ant-form-item-explain-error),
+.red :global(.ant-input-prefix),
+.red :global(.ant-input-affix-wrapper) {
+  color: #ff4d4f !important;
+  border-color: #ff4d4f !important;
+}
+
+.warning :global(.ant-form-item-explain-error),
+.warning :global(.ant-input-prefix),
+.warning :global(.ant-input-affix-wrapper) {
+  color: #faad14 !important;
+  border-color: #faad14 !important;
+}

@@ -1,3 +1,4 @@
 .root {
-	padding-top: var(--navbar-padding);
+  padding-top: var(--navbar-padding);
+  height: 100%;
 }

@@ -1,26 +1,25 @@
 import { Input } from 'antd';
-import { ChangeEvent, useCallback, useState } from 'react';
 import DOMPurify from 'dompurify';
+import { ChangeEvent, ReactNode, useCallback } from 'react';
 
 interface InputComponentProps {
-  defaultValue?: string;
   className?: string;
   placeholder?: string;
   disabled?: boolean;
+  prefix?: ReactNode;
+  type?: string;
   onChange?: (value: string) => void;
+  value?: string;
 }
 
 export const InputComponent = ({
-  defaultValue = '',
   onChange,
+  value,
   ...rest
 }: InputComponentProps) => {
-  const [value, setValue] = useState(defaultValue);
-
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const sanitizedValue = DOMPurify.sanitize(e.target.value);
-      setValue(sanitizedValue);
       onChange?.(sanitizedValue);
     },
     [onChange]

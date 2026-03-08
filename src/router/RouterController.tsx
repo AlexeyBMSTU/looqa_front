@@ -6,13 +6,13 @@ import { PageTitle } from '@/components/PageTitle/PageTitle';
 export const RouterController: FC = () => {
   return (
     <Routes>
-      {CONFIG_PAGES.map(config => (
+      {CONFIG_PAGES.map(({ LINK, PAGE, TITLE }) => (
         <Route
-          path={config.link}
+          path={LINK}
           element={
             <>
-              <PageTitle title={config.title} />
-              {config.page}
+              <PageTitle title={TITLE} />
+              {PAGE}
             </>
           }
         />

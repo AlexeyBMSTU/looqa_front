@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 import DOMPurify from 'dompurify';
-import Search from 'antd/es/input/Search'
+import Search from 'antd/es/input/Search';
 
 interface SearchComponentProps {
   defaultValue?: string;
