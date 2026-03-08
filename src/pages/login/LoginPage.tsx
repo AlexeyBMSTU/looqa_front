@@ -1,5 +1,4 @@
 import { InputComponent } from '@/components/Input/Input';
-import { CONFIG } from '@/router/config';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Flex, Form } from 'antd';
 import Title from 'antd/es/typography/Title';
@@ -21,7 +20,7 @@ export const LoginPage = () => {
         onFinish={onFinish}
       >
         <Form.Item name="username">
-          <InputComponent prefix={<UserOutlined />} placeholder="Имя" />
+          <InputComponent size='large' prefix={<UserOutlined />} placeholder="Имя" />
         </Form.Item>
         <Form.Item
           name="password"
@@ -30,6 +29,7 @@ export const LoginPage = () => {
             prefix={<LockOutlined />}
             type="password"
             placeholder="Пароль"
+            size='large'
           />
         </Form.Item>
         <Form.Item>
@@ -37,16 +37,16 @@ export const LoginPage = () => {
             <Form.Item name="remember" valuePropName="checked" noStyle>
               <Checkbox>Запомнить меня</Checkbox>
             </Form.Item>
-            <Link to={CONFIG.HOME.LINK}>Забыли пароль?</Link>
+            <Link to='/'>Забыли пароль?</Link>
           </Flex>
         </Form.Item>
 
         <Form.Item>
           <Flex vertical>
-            <Button block type="primary" htmlType="submit">
+            <Button size='large' block type="primary" htmlType="submit">
               Войти
             </Button>
-            <p>Нет аккаунта? <Link to={CONFIG.REG.LINK}>Зарегистрироваться</Link></p>
+            <p>Нет аккаунта? <Link to='/reg/'>Зарегистрироваться</Link></p>
           </Flex>
         </Form.Item>
       </Form>

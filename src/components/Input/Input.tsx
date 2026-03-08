@@ -1,9 +1,11 @@
 import { Input } from 'antd';
+import { SizeType } from 'antd/es/config-provider/SizeContext'
 import DOMPurify from 'dompurify';
 import { ChangeEvent, ReactNode, useCallback } from 'react';
 
 interface InputComponentProps {
   className?: string;
+  size?: SizeType;
   placeholder?: string;
   disabled?: boolean;
   prefix?: ReactNode;

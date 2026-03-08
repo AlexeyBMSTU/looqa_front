@@ -1,5 +1,4 @@
 import { InputComponent } from '@/components/Input/Input';
-import { CONFIG } from '@/router/config';
 import {
   calculatePasswordStrength,
   passwordValidationRules,
@@ -37,7 +36,7 @@ export const RegPage = () => {
         onFinish={onFinish}
       >
         <Form.Item name="username" rules={usernameValidationRules}>
-          <InputComponent prefix={<UserOutlined />} placeholder="Имя" />
+          <InputComponent size='large' prefix={<UserOutlined />} placeholder="Имя" />
         </Form.Item>
         <Form.Item
           className={classNames({
@@ -54,6 +53,7 @@ export const RegPage = () => {
             type="password"
             placeholder="Пароль"
             onChange={handleChangePassword}
+            size='large'
           />
         </Form.Item>
         <Progress
@@ -79,10 +79,10 @@ export const RegPage = () => {
 
         <Form.Item>
           <Flex vertical>
-            <Button block type="primary" htmlType="submit">
+            <Button size='large' block type="primary" htmlType="submit">
               Зарегистрироваться
             </Button>
-            <p>Есть аккаунт? <Link to={CONFIG.LOGIN.LINK}>Войти</Link></p>
+            <p>Есть аккаунт? <Link to='/login/'>Войти</Link></p>
           </Flex>
         </Form.Item>
       </Form>
