@@ -8,7 +8,7 @@ export default [
   eslint.configs.recommended,
   {
     files: ['**/*.{ts,tsx}'],
-    ignores: ['dist/**/*'],
+    ignores: ['./dist/'],
     languageOptions: {
       parser: tsparser,
       parserOptions: {
