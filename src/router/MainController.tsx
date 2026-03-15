@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode } from 'react';
 import { BaseRouteController } from './BaseRouteController';
 import { routeRegistry } from './RouteRegistry';
 
@@ -6,7 +6,7 @@ export interface RouteConfig {
   LINK: string;
   PAGE: ReactNode;
   TITLE: string;
-  [key: string]: unknown; 
+  [key: string]: unknown;
 }
 
 type ControllerModule = Record<string, unknown>;
@@ -44,7 +44,9 @@ export class MainController extends BaseRouteController {
 
       for (const path in controllerModules) {
         try {
-          const modulePromise = controllerModules[path]() as Promise<ControllerModule>;
+          const modulePromise = controllerModules[
+            path
+          ]() as Promise<ControllerModule>;
           controllerPromises.push(
             modulePromise
               .then(module => {
@@ -55,13 +57,16 @@ export class MainController extends BaseRouteController {
                 return null;
               })
               .catch((error: Error) => {
-                console.error(`Failed to load controller module: ${path}`, error);
+                console.error(
+                  `Failed to load controller module: ${path}`,
+                  error
+                );
                 return null;
               })
           );
         } catch (error) {
-          throw new Error('Failed to load controller module', { 
-            cause: error 
+          throw new Error('Failed to load controller module', {
+            cause: error,
           });
         }
       }
@@ -69,17 +74,18 @@ export class MainController extends BaseRouteController {
       await Promise.all(controllerPromises);
 
       this.isInitialized = true;
-      
-      routeRegistry.markAsInitialized();
 
+      routeRegistry.markAsInitialized();
     } catch (error) {
-      throw new Error('Failed to initialize controllers', { 
-        cause: error 
+      throw new Error('Failed to initialize controllers', {
+        cause: error,
       });
     }
   }
 
-  private findControllerClass(module: ControllerModule): ControllerConstructor | null {
+  private findControllerClass(
+    module: ControllerModule
+  ): ControllerConstructor | null {
     for (const exportName in module) {
       const exported = module[exportName];
       if (
@@ -102,9 +108,8 @@ export class MainController extends BaseRouteController {
     }
     return this.getRoutes();
   }
-  
-  registerRoutes(): void {
-  }
+
+  registerRoutes(): void {}
 }
 
 export const mainController = MainController.getInstance();

@@ -2,8 +2,7 @@ import { RouteConfig } from './BaseRouteController';
 import { FC, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { PageTitle } from '@/components/PageTitle/PageTitle';
-import { mainController } from './MainController'
-
+import { mainController } from './MainController';
 
 const NotFoundPage: FC = () => (
   <div style={{ padding: '20px', textAlign: 'center' }}>
@@ -15,7 +14,7 @@ const NotFoundPage: FC = () => (
 export const RouterController: FC = () => {
   const [routes, setRoutes] = useState<RouteConfig[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   useEffect(() => {
     const loadRoutes = async () => {
       try {
@@ -27,14 +26,14 @@ export const RouterController: FC = () => {
         setIsLoading(false);
       }
     };
-    
+
     loadRoutes();
   }, []);
-  
+
   if (isLoading) {
     return <div>Загрузка приложения...</div>;
   }
-  
+
   return (
     <Routes>
       {routes.map((route, index) => (

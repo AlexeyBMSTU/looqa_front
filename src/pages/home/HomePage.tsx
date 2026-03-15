@@ -1,6 +1,19 @@
 import { FC } from 'react';
-import styles from './HomePage.module.css';
+import { Hero } from './Hero/Hero';
+import { PageComponent } from '@/components/PageComponent/PageComponent';
+import { Benefits } from './Benefits/Benefits';
+import { ForWho } from './ForWho/ForWho';
+import { HowItWorks } from './HowItWorks/HowItWorks';
+import { Footer } from './Footer/Footer';
 
 export const HomePage: FC = () => {
-  return <div className={styles.root}></div>;
+  return (
+    <PageComponent>
+      <Hero />
+      <Benefits />
+      <ForWho />
+      <HowItWorks />
+      <Footer />
+    </PageComponent>
+  );
 };

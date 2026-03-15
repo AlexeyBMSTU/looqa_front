@@ -1,5 +1,5 @@
 import { Input } from 'antd';
-import { SizeType } from 'antd/es/config-provider/SizeContext'
+import { SizeType } from 'antd/es/config-provider/SizeContext';
 import DOMPurify from 'dompurify';
 import { ChangeEvent, ReactNode, useCallback } from 'react';
 
