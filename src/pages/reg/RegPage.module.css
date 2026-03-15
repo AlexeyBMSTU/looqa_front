@@ -57,3 +57,7 @@
 .colorTextWithUnmount :global(.ant-form-item-explain-error) {
   color: #f7c052 !important;
 }
+
+.submitButton {
+  margin-top: 20px;
+}

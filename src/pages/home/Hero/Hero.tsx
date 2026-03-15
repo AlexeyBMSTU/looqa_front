@@ -2,8 +2,17 @@ import { Button } from 'antd';
 import styles from './Hero.module.css';
 import Title from 'antd/es/typography/Title';
 import { Description } from '@/components/Text/Description/Description';
+import { Link } from 'react-router-dom';
+import { regStore } from '@/pages/reg/RegStore';
 
 export const Hero = () => {
+  const handleClickOwner = () => {
+    regStore.setRole('owner');
+  };
+
+  const handleClickQA = () => {
+    regStore.setRole('qa');
+  };
   return (
     <section className={styles.hero}>
       <div className={styles.container}>
@@ -18,12 +27,16 @@ export const Hero = () => {
             кругозор"
           />
           <div className={styles.buttons}>
-            <Button size="large" type="primary">
-              Разместить продукт
-            </Button>
-            <Button size="large" type="default">
-              Начать тестировать
-            </Button>
+            <Link to="/reg/">
+              <Button onClick={handleClickOwner} size="large" type="primary">
+                Разместить продукт
+              </Button>
+            </Link>
+            <Link to="/reg/">
+              <Button onClick={handleClickQA} size="large" type="default">
+                Начать тестировать
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

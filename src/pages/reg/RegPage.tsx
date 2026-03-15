@@ -1,22 +1,25 @@
 import { InputComponent } from '@/components/Input/Input';
+import { PageComponent } from '@/components/PageComponent/PageComponent';
 import {
   calculatePasswordStrength,
+  checkRoleSelected,
   passwordValidationRules,
   usernameValidationRules,
 } from '@/utils/validateAuth';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Flex, Form, Progress } from 'antd';
+import { Button, Flex, Form, Progress } from 'antd';
 import Title from 'antd/es/typography/Title';
-import { useState } from 'react';
+import classNames from 'classnames';
+import { useCallback, useState } from 'react';
 import { Link } from 'react-router';
 import styles from './RegPage.module.css';
-import classNames from 'classnames';
-import { PageComponent } from '@/components/PageComponent/PageComponent';
+import { regStore } from './RegStore';
+import { ROLES } from './consts';
+import { observer } from 'mobx-react-lite';
 
-export const RegPage = () => {
+export const RegPage = observer(() => {
   const [passwordStrength, setPasswordStrength] = useState(0);
   const [form] = Form.useForm();
-
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
   };
@@ -25,6 +28,16 @@ export const RegPage = () => {
     const strength = calculatePasswordStrength(value);
     setPasswordStrength(strength);
   };
+
+  const handleClickRoleOwner = useCallback(() => {
+    regStore.setRole('owner');
+    form.setFieldsValue({ role: 'owner' });
+  }, [form]);
+
+  const handleClickRoleQA = useCallback(() => {
+    regStore.setRole('qa');
+    form.setFieldsValue({ role: 'qa' });
+  }, [form]);
 
   return (
     <PageComponent>
@@ -64,32 +77,54 @@ export const RegPage = () => {
                 size="large"
               />
             </Form.Item>
-            <Progress
-              percent={passwordStrength}
-              showInfo={false}
-              strokeColor={
-                passwordStrength < 40
-                  ? '#ff4d4f'
-                  : passwordStrength >= 40 && passwordStrength < 70
-                    ? '#faad14'
-                    : passwordStrength >= 70 && passwordStrength < 100
-                      ? '#f7c052'
-                      : '#52c41a'
-              }
-              size="small"
-              className={styles.passwordStrength}
-            />
             <Form.Item>
-              <Flex justify="space-between" align="center">
-                <Form.Item name="remember" valuePropName="checked" noStyle>
-                  <Checkbox>Запомнить меня</Checkbox>
-                </Form.Item>
+              <Progress
+                percent={passwordStrength}
+                showInfo={false}
+                strokeColor={
+                  passwordStrength < 40
+                    ? '#ff4d4f'
+                    : passwordStrength >= 40 && passwordStrength < 70
+                      ? '#faad14'
+                      : passwordStrength >= 70 && passwordStrength < 100
+                        ? '#f7c052'
+                        : '#52c41a'
+                }
+                size="small"
+                className={styles.passwordStrength}
+              />
+            </Form.Item>
+            <Form.Item name="role" rules={checkRoleSelected}>
+              <Flex gap={10}>
+                <Button
+                  onClick={handleClickRoleOwner}
+                  size="large"
+                  color="default"
+                  variant={regStore.role === ROLES.owner ? 'filled' : 'text'}
+                  // type={regStore.role === ROLES.owner ? 'default' : 'text'}
+                >
+                  Ищу аудиторию
+                </Button>
+                <Button
+                  onClick={handleClickRoleQA}
+                  size="large"
+                  color="default"
+                  variant={regStore.role === ROLES.qa ? 'filled' : 'text'}
+                  // type={regStore.role === ROLES.qa ? 'default' : 'text'}
+                >
+                  Ищу проекты
+                </Button>
               </Flex>
             </Form.Item>
-
             <Form.Item>
               <Flex vertical>
-                <Button size="large" block type="primary" htmlType="submit">
+                <Button
+                  className={styles.submitButton}
+                  size="large"
+                  block
+                  type="primary"
+                  htmlType="submit"
+                >
                   Зарегистрироваться
                 </Button>
                 <p>
@@ -102,4 +137,4 @@ export const RegPage = () => {
       </div>
     </PageComponent>
   );
-};
+});

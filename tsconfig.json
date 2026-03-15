@@ -21,6 +21,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
+    "experimentalDecorators": true,
+
     /* Path aliases */
     "baseUrl": ".",
     "paths": {

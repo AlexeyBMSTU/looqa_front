@@ -41,6 +41,14 @@ const PASSWORD_RULES_CHECK = [
   },
 ];
 
+const validateRoleSelector = (_: any, value: string) => {
+  if (!value) {
+    return Promise.reject(new Error('Роль должна быть выбрана'));
+  }
+
+  return Promise.resolve();
+};
+
 const validatePassword = (_: any, value: string) => {
   if (!value) {
     return Promise.reject(new Error('Пароль не должен быть пустым'));
@@ -69,3 +77,5 @@ export const calculatePasswordStrength = (password: string): number => {
 export const usernameValidationRules = [{ validator: validateUsername }];
 
 export const passwordValidationRules = [{ validator: validatePassword }];
+
+export const checkRoleSelected = [{ validator: validateRoleSelector }];
