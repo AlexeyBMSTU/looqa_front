@@ -1,5 +1,6 @@
 import { Card } from '@/pages/Card/Card';
 import styles from './ForWho.module.css';
+import { Description } from '@/components/Text/Description/Description';
 
 export const ForWho = () => {
   return (
@@ -7,9 +8,7 @@ export const ForWho = () => {
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 className={styles.title}>Для кого это?</h2>
-          <p className={styles.subtitle}>
-            LooQA подходит для разных задач и уровней опыта
-          </p>
+          <Description text="LooQA подходит для разных задач и уровней опыта" />
         </div>
 
         <div className={styles.grid}>

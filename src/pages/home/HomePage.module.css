@@ -1,0 +1,72 @@
+.blurСircle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.7;
+  animation: float 20s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(100px, -50px) scale(1.1);
+  }
+  50% {
+    transform: translate(50px, 100px) scale(0.9);
+  }
+  75% {
+    transform: translate(-50px, 50px) scale(1.2);
+  }
+}
+
+.circle1 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #ff6b6b, #ff8787);
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.circle2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #4ecdc4, #45b7d1);
+  top: 40%;
+  right: 10%;
+  animation-delay: -5s;
+  animation-duration: 25s;
+}
+
+.circle3 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, #a8e6cf, #d4ed9a);
+  bottom: 10%;
+  left: 30%;
+  animation-delay: -2s;
+  animation-duration: 18s;
+}
+
+.circle4 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, #ffd93d, #ffb347);
+  top: 20%;
+  right: 30%;
+  animation-delay: -7s;
+  animation-duration: 22s;
+}
+
+.circle5 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, #ff9999, #ff6b6b);
+  bottom: 20%;
+  right: 20%;
+  animation-delay: -3s;
+  animation-duration: 15s;
+}

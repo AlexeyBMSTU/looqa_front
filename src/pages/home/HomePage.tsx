@@ -4,16 +4,16 @@ import { PageComponent } from '@/components/PageComponent/PageComponent';
 import { Benefits } from './Benefits/Benefits';
 import { ForWho } from './ForWho/ForWho';
 import { HowItWorks } from './HowItWorks/HowItWorks';
-import { Footer } from './Footer/Footer';
+import { BlurCircles } from '@/components/BlurCircles/BlurCircles';
 
 export const HomePage: FC = () => {
   return (
     <PageComponent>
+      <BlurCircles />
       <Hero />
       <Benefits />
       <ForWho />
       <HowItWorks />
-      <Footer />
     </PageComponent>
   );
 };

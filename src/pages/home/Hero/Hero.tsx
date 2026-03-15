@@ -1,6 +1,7 @@
 import { Button } from 'antd';
 import styles from './Hero.module.css';
 import Title from 'antd/es/typography/Title';
+import { Description } from '@/components/Text/Description/Description';
 
 export const Hero = () => {
   return (
@@ -11,12 +12,11 @@ export const Hero = () => {
             Найдите <span className={styles.highlight}>первую аудиторию</span>
             &nbsp; для&nbsp;вашего продукта
           </Title>
-          <p className={styles.description}>
-            LooQA — платформа, где создатели цифровых продуктов находят первую
+          <Description
+            text="LooQA — платформа, где создатели цифровых продуктов находят первую
             аудиторию, а пользователи открывают интересные решения и увеличивают
-            кругозор
-          </p>
-
+            кругозор"
+          />
           <div className={styles.buttons}>
             <Button size="large" type="primary">
               Разместить продукт

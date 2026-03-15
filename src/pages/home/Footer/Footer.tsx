@@ -7,7 +7,6 @@ export function Footer() {
         <div className={styles.grid}>
           <div className={styles.brand}>
             <div className={styles.logo}>
-              <div className={styles.logoIcon}>L</div>
               <span className={styles.logoText}>LooQA</span>
             </div>
             <p className={styles.brandDescription}>
