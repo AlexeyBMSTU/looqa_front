@@ -1,9 +1,9 @@
-import { Button } from 'antd';
-import styles from './Hero.module.css';
-import Title from 'antd/es/typography/Title';
 import { Description } from '@/components/Text/Description/Description';
+import { regStore } from '@/pages/reg/RegPage.model';
+import { Button } from 'antd';
+import Title from 'antd/es/typography/Title';
 import { Link } from 'react-router-dom';
-import { regStore } from '@/pages/reg/RegStore';
+import styles from './Hero.module.css';
 
 export const Hero = () => {
   const handleClickOwner = () => {

@@ -10,12 +10,12 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Flex, Form, Progress } from 'antd';
 import Title from 'antd/es/typography/Title';
 import classNames from 'classnames';
+import { observer } from 'mobx-react-lite';
 import { useCallback, useState } from 'react';
 import { Link } from 'react-router';
+import { regStore } from './RegPage.model';
 import styles from './RegPage.module.css';
-import { regStore } from './RegStore';
 import { ROLES } from './consts';
-import { observer } from 'mobx-react-lite';
 
 export const RegPage = observer(() => {
   const [passwordStrength, setPasswordStrength] = useState(0);
