@@ -1,17 +1,17 @@
-import { Description } from '@/components/Text/Description/Description';
-import { regStore } from '@/pages/reg/RegPage.model';
 import { Button } from 'antd';
 import Title from 'antd/es/typography/Title';
 import { Link } from 'react-router-dom';
 import styles from './Hero.module.css';
+import { regModel } from '@/features/reg/models';
+import { Description } from '@/shared/components/Text/Description/Description';
 
 export const Hero = () => {
   const handleClickOwner = () => {
-    regStore.setRole('owner');
+    regModel.setRole('owner');
   };
 
   const handleClickQA = () => {
-    regStore.setRole('qa');
+    regModel.setRole('qa');
   };
   return (
     <section className={styles.hero}>

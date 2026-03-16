@@ -1,8 +1,8 @@
 import { BrowserRouter as Router } from 'react-router-dom';
 import styles from './App.module.css';
-import { Navbar } from './components/Navbar/Navbar';
 import { Footer } from './pages/home/Footer/Footer';
 import { RouterController } from './router/RouterController';
+import { Navbar } from './shared/components/Navbar/Navbar';
 
 function App() {
   return (

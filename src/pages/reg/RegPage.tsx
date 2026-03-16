@@ -1,6 +1,12 @@
-import { InputComponent } from '@/components/Input/Input';
-import { PageComponent } from '@/components/PageComponent/PageComponent';
-import { calculatePasswordStrength } from '@/utils/validateAuth';
+import { FIELDS, ROLES } from '@/features/reg/consts';
+import {
+  passwordValidationRules,
+  roleValidationRules,
+  usernameValidationRules,
+} from '@/features/reg/consts/index.rules';
+import { regModel } from '@/features/reg/models';
+import { InputComponent } from '@/shared/components/Input/Input';
+import { PageComponent } from '@/shared/components/PageComponent/PageComponent';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Flex, Form, Progress } from 'antd';
 import Title from 'antd/es/typography/Title';
@@ -8,26 +14,17 @@ import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { useCallback, useState } from 'react';
 import { Link } from 'react-router';
-import { regStore } from './RegPage.model';
 import styles from './RegPage.module.css';
-import { ROLES } from './consts';
-import {
-  passwordValidationRules,
-  roleValidationRules,
-  usernameValidationRules,
-} from './helpers/validate.rules';
+import { calculatePasswordStrength } from '@/features/reg/helpers';
 
 export const RegPage = observer(() => {
   const [passwordStrength, setPasswordStrength] = useState(0);
   const [form] = Form.useForm();
   const onFinish = async (values: any) => {
     try {
-      await regStore.requestAuth(values);
-      // Здесь можно добавить логику после успешной регистрации
-      // Например, перенаправление на страницу входа
+      await regModel.requestAuth(values);
     } catch (error) {
       console.error('Ошибка регистрации:', error);
-      // Здесь можно добавить обработку ошибок
     }
   };
 
@@ -37,12 +34,12 @@ export const RegPage = observer(() => {
   };
 
   const handleClickRoleOwner = useCallback(() => {
-    regStore.setRole('owner');
+    regModel.setRole('owner');
     form.setFieldsValue({ role: 'owner' });
   }, [form]);
 
   const handleClickRoleQA = useCallback(() => {
-    regStore.setRole('qa');
+    regModel.setRole('qa');
     form.setFieldsValue({ role: 'qa' });
   }, [form]);
 
@@ -55,10 +52,10 @@ export const RegPage = observer(() => {
             className={styles.form}
             name="reg"
             form={form}
-            initialValues={{ remember: true, role: regStore.role }}
+            initialValues={{ remember: true, role: regModel.role }}
             onFinish={onFinish}
           >
-            <Form.Item name="username" rules={usernameValidationRules}>
+            <Form.Item name={FIELDS.USERNAME} rules={usernameValidationRules}>
               <InputComponent
                 size="large"
                 prefix={<UserOutlined />}
@@ -73,7 +70,7 @@ export const RegPage = observer(() => {
                 [styles.good]: passwordStrength >= 70 && passwordStrength <= 90,
                 [styles.colorTextWithUnmount]: passwordStrength === 100,
               })}
-              name="password"
+              name={FIELDS.PASSWORD}
               rules={passwordValidationRules}
             >
               <InputComponent
@@ -101,14 +98,13 @@ export const RegPage = observer(() => {
                 className={styles.passwordStrength}
               />
             </Form.Item>
-            <Form.Item name="role" rules={roleValidationRules}>
+            <Form.Item name={FIELDS.ROLE} rules={roleValidationRules}>
               <Flex gap={10}>
                 <Button
                   onClick={handleClickRoleOwner}
                   size="large"
                   color="default"
-                  variant={regStore.role === ROLES.owner ? 'filled' : 'text'}
-                  // type={regStore.role === ROLES.owner ? 'default' : 'text'}
+                  variant={regModel.role === ROLES.OWNER ? 'filled' : 'text'}
                 >
                   Ищу аудиторию
                 </Button>
@@ -116,8 +112,7 @@ export const RegPage = observer(() => {
                   onClick={handleClickRoleQA}
                   size="large"
                   color="default"
-                  variant={regStore.role === ROLES.qa ? 'filled' : 'text'}
-                  // type={regStore.role === ROLES.qa ? 'default' : 'text'}
+                  variant={regModel.role === ROLES.QA ? 'filled' : 'text'}
                 >
                   Ищу проекты
                 </Button>

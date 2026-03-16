@@ -1,11 +1,16 @@
-import { apiService } from '@/services/api/APIService';
+import { apiService } from '@/core/api/APIService';
+import { registrationSchema } from '@/features/reg/schemas';
+import {
+  RegistrationData,
+  RequestAuthProps,
+  RoleType,
+} from '@/features/reg/types';
 import { action, makeAutoObservable } from 'mobx';
 import { z } from 'zod';
-import { registrationSchema } from './helpers/validate.rules';
-import { RegistrationData, RequestAuthProps, RoleType } from './reg.types';
+import { ROLES } from '../consts';
 
-class RegStore {
-  role: RoleType = 'owner';
+class RegModel {
+  role: RoleType = ROLES.OWNER;
 
   constructor() {
     makeAutoObservable(this);
@@ -46,4 +51,4 @@ class RegStore {
   }
 }
 
-export const regStore = new RegStore();
+export const regModel = new RegModel();

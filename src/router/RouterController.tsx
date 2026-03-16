@@ -1,8 +1,8 @@
 import { RouteConfig } from './BaseRouteController';
 import { FC, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { PageTitle } from '@/components/PageTitle/PageTitle';
 import { mainController } from './MainController';
+import { PageTitle } from '@/shared/components/PageTitle/PageTitle';
 
 const NotFoundPage: FC = () => (
   <div style={{ padding: '20px', textAlign: 'center' }}>

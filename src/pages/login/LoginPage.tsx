@@ -1,10 +1,10 @@
-import { InputComponent } from '@/components/Input/Input';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Flex, Form } from 'antd';
 import Title from 'antd/es/typography/Title';
 import { Link } from 'react-router';
 import styles from './LoginPage.module.css';
-import { PageComponent } from '@/components/PageComponent/PageComponent';
+import { PageComponent } from '@/shared/components/PageComponent/PageComponent';
+import { InputComponent } from '@/shared/components/Input/Input';
 
 export const LoginPage = () => {
   const onFinish = (values: any) => {

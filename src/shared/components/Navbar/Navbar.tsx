@@ -2,8 +2,8 @@ import { LoginOutlined, LogoutOutlined } from '@ant-design/icons';
 
 import styles from './Navbar.module.css';
 import { Button, Flex } from 'antd';
-import { SearchComponent } from '@/components/Search/Search';
 import { Link } from 'react-router';
+import { SearchComponent } from '../Search/Search';
 
 export const Navbar = () => {
   return (

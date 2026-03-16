@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { Hero } from './Hero/Hero';
-import { PageComponent } from '@/components/PageComponent/PageComponent';
 import { Benefits } from './Benefits/Benefits';
 import { ForWho } from './ForWho/ForWho';
 import { HowItWorks } from './HowItWorks/HowItWorks';
-import { BlurCircles } from '@/components/BlurCircles/BlurCircles';
+import { BlurCircles } from '@/shared/components/BlurCircles/BlurCircles';
+import { PageComponent } from '@/shared/components/PageComponent/PageComponent';
 
 export const HomePage: FC = () => {
   return (
