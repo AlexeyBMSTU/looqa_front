@@ -1,14 +1,8 @@
-import { action, makeAutoObservable } from 'mobx';
-import { ROLES } from './consts';
 import { apiService } from '@/services/api/APIService';
-
-export type RoleType = (typeof ROLES)[keyof typeof ROLES];
-
-interface RequestAuthProps {
-  username: string;
-  password: string;
-  role: RoleType;
-}
+import { action, makeAutoObservable } from 'mobx';
+import { z } from 'zod';
+import { registrationSchema } from './helpers/validate.rules';
+import { RegistrationData, RequestAuthProps, RoleType } from './reg.types';
 
 class RegStore {
   role: RoleType = 'owner';
@@ -23,11 +17,27 @@ class RegStore {
   }
 
   @action.bound
+  validateRegistrationData(data: unknown): RegistrationData {
+    try {
+      return registrationSchema.parse(data);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        throw new Error('Ошибка валидации данных регистрации', {
+          cause: error,
+        });
+      }
+      throw error;
+    }
+  }
+
+  @action.bound
   async requestAuth(body: RequestAuthProps) {
     try {
+      const validatedData = this.validateRegistrationData(body);
+
       const requestParams = {
         url: '/auth/reg/',
-        body,
+        body: validatedData,
       };
       await apiService.post(requestParams);
     } catch (error) {

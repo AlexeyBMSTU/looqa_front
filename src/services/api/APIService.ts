@@ -18,7 +18,12 @@ class ApiService {
     this.baseUrl = baseUrl;
   }
 
-  async request<T>({ url, query, method, body }: RequestProps): Promise<T> {
+  private async request<T>({
+    url,
+    query,
+    method,
+    body,
+  }: RequestProps): Promise<T> {
     const apiUrl = `/api${url}`;
 
     let requestUrl = `${this.baseUrl}${apiUrl}`;
@@ -34,7 +39,9 @@ class ApiService {
     const response = await fetch(requestUrl, {
       method,
       headers: this.headers,
-      body: body ? JSON.stringify(body) : undefined,
+      body: body ? JSON.stringify(body) : null,
+      mode: 'cors',
+      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -52,7 +59,7 @@ class ApiService {
   }
 
   async post<T>(data: DataProps): Promise<T> {
-    const method = 'GET';
+    const method = 'POST';
 
     return await this.request({ method, ...data });
   }
@@ -76,4 +83,4 @@ class ApiService {
   }
 }
 
-export const apiService = new ApiService('/');
+export const apiService = new ApiService('http://localhost:5173');

@@ -1,11 +1,6 @@
 import { InputComponent } from '@/components/Input/Input';
 import { PageComponent } from '@/components/PageComponent/PageComponent';
-import {
-  calculatePasswordStrength,
-  checkRoleSelected,
-  passwordValidationRules,
-  usernameValidationRules,
-} from '@/utils/validateAuth';
+import { calculatePasswordStrength } from '@/utils/validateAuth';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Flex, Form, Progress } from 'antd';
 import Title from 'antd/es/typography/Title';
@@ -16,12 +11,24 @@ import { Link } from 'react-router';
 import { regStore } from './RegPage.model';
 import styles from './RegPage.module.css';
 import { ROLES } from './consts';
+import {
+  passwordValidationRules,
+  roleValidationRules,
+  usernameValidationRules,
+} from './helpers/validate.rules';
 
 export const RegPage = observer(() => {
   const [passwordStrength, setPasswordStrength] = useState(0);
   const [form] = Form.useForm();
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+  const onFinish = async (values: any) => {
+    try {
+      await regStore.requestAuth(values);
+      // Здесь можно добавить логику после успешной регистрации
+      // Например, перенаправление на страницу входа
+    } catch (error) {
+      console.error('Ошибка регистрации:', error);
+      // Здесь можно добавить обработку ошибок
+    }
   };
 
   const handleChangePassword = (value: string) => {
@@ -48,7 +55,7 @@ export const RegPage = observer(() => {
             className={styles.form}
             name="reg"
             form={form}
-            initialValues={{ remember: true }}
+            initialValues={{ remember: true, role: regStore.role }}
             onFinish={onFinish}
           >
             <Form.Item name="username" rules={usernameValidationRules}>
@@ -94,7 +101,7 @@ export const RegPage = observer(() => {
                 className={styles.passwordStrength}
               />
             </Form.Item>
-            <Form.Item name="role" rules={checkRoleSelected}>
+            <Form.Item name="role" rules={roleValidationRules}>
               <Flex gap={10}>
                 <Button
                   onClick={handleClickRoleOwner}
