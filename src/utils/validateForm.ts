@@ -6,7 +6,8 @@ export const validateFormWithZod = (
 ) => {
   return async (_: any, value: any) => {
     try {
-      const data = { [fieldName]: value };
+      const processedValue = value === undefined ? '' : value;
+      const data = { [fieldName]: processedValue };
       schema.parse(data);
       return Promise.resolve();
     } catch (error) {

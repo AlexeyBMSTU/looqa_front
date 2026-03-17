@@ -1,3 +1,5 @@
+import { GENERAL_URL } from '@/env';
+
 interface DataProps {
   url: string;
   body?: unknown;
@@ -83,4 +85,4 @@ class ApiService {
   }
 }
 
-export const apiService = new ApiService('http://localhost:5173');
+export const apiService = new ApiService(GENERAL_URL);

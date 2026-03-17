@@ -23,6 +23,7 @@ export const RegPage = observer(() => {
   const [form] = Form.useForm();
   const onFinish = async (data: RequestAuthProps) => {
     try {
+      console.log(data);
       await regModel.requestAuth(data);
     } catch (error) {
       console.error('Ошибка регистрации:', error);

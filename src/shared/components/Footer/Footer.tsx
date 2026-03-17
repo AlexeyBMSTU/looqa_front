@@ -1,4 +1,5 @@
 import styles from './Footer.module.css';
+import { PureLink } from '../Link/Link';
 
 export function Footer() {
   return (
@@ -18,7 +19,7 @@ export function Footer() {
             <h4>Компания</h4>
             <ul>
               <li>
-                <a href="#">О нас</a>
+                <PureLink link="/docs/#help" label="О нас" />
               </li>
               <li>
                 <a href="#">Блог</a>

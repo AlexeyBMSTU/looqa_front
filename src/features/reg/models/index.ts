@@ -38,6 +38,7 @@ class RegModel {
   @action.bound
   async requestAuth(body: RequestAuthProps) {
     try {
+      console.log(body);
       const validatedData = this.validateRegistrationData(body);
 
       const requestParams = {

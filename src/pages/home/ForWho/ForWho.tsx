@@ -1,6 +1,6 @@
-import { Card } from '@/pages/Card/Card';
-import styles from './ForWho.module.css';
+import { Card } from '@/shared/components/Card/Card';
 import { Description } from '@/shared/components/Text/Description/Description';
+import styles from './ForWho.module.css';
 
 export const ForWho = () => {
   return (

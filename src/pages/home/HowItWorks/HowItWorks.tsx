@@ -1,4 +1,4 @@
-import { Card } from '@/pages/Card/Card';
+import { Card } from '@/shared/components/Card/Card';
 import styles from './HowItWorks.module.css';
 
 export const HowItWorks = () => {

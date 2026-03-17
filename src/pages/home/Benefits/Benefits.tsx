@@ -1,6 +1,6 @@
-import { Card } from '@/pages/Card/Card';
-import styles from './Benefits.module.css';
+import { Card } from '@/shared/components/Card/Card';
 import { Description } from '@/shared/components/Text/Description/Description';
+import styles from './Benefits.module.css';
 
 export const Benefits = () => {
   return (
