@@ -5,10 +5,13 @@ import { Link } from 'react-router';
 import styles from './LoginPage.module.css';
 import { PageComponent } from '@/shared/components/PageComponent/PageComponent';
 import { InputComponent } from '@/shared/components/Input/Input';
+import { loginModel } from '@/features/login/models';
+import { RequestAuthProps } from '@/features/login/types';
 
 export const LoginPage = () => {
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+  const onFinish = async (data: RequestAuthProps) => {
+    console.log('Received values of form: ', data);
+    await loginModel.requestAuth(data);
   };
 
   return (
@@ -19,7 +22,7 @@ export const LoginPage = () => {
           <Form
             className={styles.form}
             name="login"
-            initialValues={{ remember: true }}
+            initialValues={{ remember: false }}
             onFinish={onFinish}
           >
             <Form.Item name="username">

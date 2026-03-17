@@ -16,13 +16,14 @@ import { useCallback, useState } from 'react';
 import { Link } from 'react-router';
 import styles from './RegPage.module.css';
 import { calculatePasswordStrength } from '@/features/reg/helpers';
+import { RequestAuthProps } from '@/features/reg/types';
 
 export const RegPage = observer(() => {
   const [passwordStrength, setPasswordStrength] = useState(0);
   const [form] = Form.useForm();
-  const onFinish = async (values: any) => {
+  const onFinish = async (data: RequestAuthProps) => {
     try {
-      await regModel.requestAuth(values);
+      await regModel.requestAuth(data);
     } catch (error) {
       console.error('Ошибка регистрации:', error);
     }
