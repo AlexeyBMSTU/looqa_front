@@ -19,7 +19,7 @@ export function Footer() {
             <h4>Компания</h4>
             <ul>
               <li>
-                <PureLink link="/docs/#help" label="О нас" />
+                <PureLink link="/docs/#help5" label="О нас" />
               </li>
               <li>
                 <a href="#">Блог</a>
