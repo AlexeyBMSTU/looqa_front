@@ -105,16 +105,16 @@ export const RegPage = observer(() => {
                 <Button
                   onClick={handleClickRoleOwner}
                   size="large"
-                  color="default"
-                  variant={regModel.role === ROLES.OWNER ? 'filled' : 'text'}
+                  color={regModel.role === ROLES.OWNER ? 'primary' : 'default'}
+                  variant={regModel.role === ROLES.OWNER ? 'outlined' : 'text'}
                 >
                   Ищу аудиторию
                 </Button>
                 <Button
                   onClick={handleClickRoleQA}
                   size="large"
-                  color="default"
-                  variant={regModel.role === ROLES.QA ? 'filled' : 'text'}
+                  color={regModel.role === ROLES.QA ? 'primary' : 'default'}
+                  variant={regModel.role === ROLES.QA ? 'outlined' : 'text'}
                 >
                   Ищу проекты
                 </Button>

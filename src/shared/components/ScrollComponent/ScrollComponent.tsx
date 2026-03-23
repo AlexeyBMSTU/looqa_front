@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { customScrollTo } from './scrollTo';
 
 export const ScrollComponent = () => {
   const location = useLocation();
@@ -18,35 +19,33 @@ export const ScrollComponent = () => {
           const getNavbarHeight = () => {
             if (navbarElement) {
               return navbarElement.getBoundingClientRect().height;
-            } else {
-              const tempDiv = document.createElement('div');
-              tempDiv.style.height = '4em';
-              tempDiv.style.position = 'absolute';
-              tempDiv.style.visibility = 'hidden';
-              document.body.appendChild(tempDiv);
-              const height = tempDiv.getBoundingClientRect().height;
-              document.body.removeChild(tempDiv);
-              return height;
             }
+
+            const tempDiv = document.createElement('div');
+            tempDiv.style.height = '4em';
+            tempDiv.style.position = 'absolute';
+            tempDiv.style.visibility = 'hidden';
+            document.body.appendChild(tempDiv);
+            const height = tempDiv.getBoundingClientRect().height;
+            document.body.removeChild(tempDiv);
+            return height;
           };
 
           const navbarHeight = getNavbarHeight();
           const elementPosition =
             element.getBoundingClientRect().top + window.pageYOffset;
           const scrollTop = elementPosition - navbarHeight;
-
-          window.scrollTo({
-            top: scrollTop,
-            left: 0,
-            behavior: 'smooth',
-          });
+          customScrollTo(scrollTop);
+          return;
         }
       }
+
+      customScrollTo();
     };
 
     scrollToHash();
 
-    const timeouts = [125];
+    const timeouts = [250];
     timeouts.forEach(timeout => {
       setTimeout(scrollToHash, timeout);
     });
