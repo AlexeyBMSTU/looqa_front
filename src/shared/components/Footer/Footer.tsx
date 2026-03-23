@@ -22,10 +22,7 @@ export function Footer() {
                 <PureLink link="/docs/#about" label="О нас" />
               </li>
               <li>
-                <a href="#">Блог</a>
-              </li>
-              <li>
-                <a href="/docs/#contacts">Контакты</a>
+                <PureLink link="/docs/#contacts" label="Контакты" />
               </li>
             </ul>
           </div>
@@ -34,13 +31,16 @@ export function Footer() {
             <h4>Поддержка</h4>
             <ul>
               <li>
-                <a href="#">Помощь</a>
+                <PureLink link="/docs/#faq" label="FAQ" />
               </li>
               <li>
-                <a href="#">Условия использования</a>
+                <PureLink link="/docs/#terms" label="Условия использования" />
               </li>
               <li>
-                <a href="#">Конфиденциальность</a>
+                <PureLink
+                  link="/docs/#confidentiality"
+                  label="Конфиденциальность"
+                />
               </li>
             </ul>
           </div>

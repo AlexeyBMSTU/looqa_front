@@ -26,8 +26,8 @@ const items: MenuItem[] = [
     type: 'group',
     children: [
       {
-        key: 'help',
-        label: <PureLink link="/docs/#help" label="Помощь" />,
+        key: 'faq',
+        label: <PureLink link="/docs/#faq" label="FAQ" />,
       },
       {
         key: 'termsOfUse',
