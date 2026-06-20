@@ -4,17 +4,20 @@ import { Footer } from './shared/components/Footer/Footer';
 import { RouterController } from './router/RouterController';
 import { Navbar } from './shared/components/Navbar/Navbar';
 import { ScrollComponent } from './shared/components/ScrollComponent/ScrollComponent';
+import { StyleProvider } from '@ant-design/cssinjs';
 
 function App() {
   return (
-    <Router>
-      <ScrollComponent />
-      <Navbar />
-      <div className={styles.root}>
-        <RouterController />
-      </div>
-      <Footer />
-    </Router>
+    <StyleProvider layer>
+      <Router>
+        <ScrollComponent />
+        <Navbar />
+        <div className={styles.root}>
+          <RouterController />
+        </div>
+        <Footer />
+      </Router>
+    </StyleProvider>
   );
 }
 

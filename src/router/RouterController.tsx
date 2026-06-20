@@ -3,13 +3,7 @@ import { FC, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { mainController } from './MainController';
 import { PageTitle } from '@/shared/components/PageTitle/PageTitle';
-
-const NotFoundPage: FC = () => (
-  <div style={{ padding: '20px', textAlign: 'center' }}>
-    <h1>404 - Страница не найдена</h1>
-    <p>Извините, но запрашиваемая страница не существует.</p>
-  </div>
-);
+import { NotFoundPage } from '@/pages/notFound/NotFoundPage';
 
 export const RouterController: FC = () => {
   const [routes, setRoutes] = useState<RouteConfig[]>([]);
@@ -38,12 +32,12 @@ export const RouterController: FC = () => {
     <Routes>
       {routes.map((route, index) => (
         <Route
-          key={`${route.LINK}-${index}`}
-          path={route.LINK}
+          key={`${route.link}-${index}`}
+          path={route.link}
           element={
             <>
-              <PageTitle title={route.TITLE} />
-              {route.PAGE}
+              <PageTitle title={route.title} />
+              {route.page}
             </>
           }
         />

@@ -9,6 +9,8 @@ body {
 	font-weight: var(--font-weight-normal);
 	line-height: var(--line-height-normal);
 	font-size: var(--font-size-base);
+	background-color: var(--color-blue);
+	color: var(--color-brown);
 }
 #root {
 	height: 100%;
@@ -38,6 +40,10 @@ body {
 	--color-black: #111827;
 	--color-highlight:#4f46e5;
 	--color-description: #6b7280;
+
+	--color-beige: #E0D1BB;
+	--color-brown: #3C241C;
+	--color-blue: #B7CEE4;
 }
 
 /* Regular */

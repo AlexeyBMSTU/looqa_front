@@ -1,0 +1,24 @@
+.root {
+  font-family: 'Evolventa';
+  color: var(--color-brown);
+}
+
+.xs {
+  font-size: 1rem;
+}
+
+.s {
+  font-size: 1.5rem;
+}
+
+.m {
+  font-size: 2rem;
+}
+
+.l {
+  font-size: 2.5rem;
+}
+
+.xl {
+  font-size: 3rem;
+}

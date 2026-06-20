@@ -2,9 +2,9 @@ import { ReactNode } from 'react';
 import { routeRegistry } from './RouteRegistry';
 
 export interface RouteConfig {
-  LINK: string;
-  PAGE: ReactNode;
-  TITLE: string;
+  link: string;
+  page: ReactNode;
+  title: string;
 }
 
 export abstract class BaseRouteController {

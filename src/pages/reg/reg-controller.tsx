@@ -4,9 +4,9 @@ import { RegPage } from './RegPage';
 export class RegController extends BaseRouteController {
   registerRoutes(): void {
     this.addRoute({
-      LINK: '/reg/',
-      PAGE: <RegPage />,
-      TITLE: 'Регистрация',
+      link: '/reg/',
+      page: <RegPage />,
+      title: 'Регистрация',
     });
   }
 }

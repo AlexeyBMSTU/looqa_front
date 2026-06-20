@@ -42,10 +42,10 @@
 }
 
 .title {
-  font-size: 3.5rem !important;
+  font-size: 3.5rem;
   font-weight: 700;
   line-height: 1.2;
-  color: #111827;
+  color: unset;
   margin-bottom: 1.5rem;
 }
 
