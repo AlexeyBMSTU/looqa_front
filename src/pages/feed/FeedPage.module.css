@@ -1,0 +1,55 @@
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.heading {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-brown);
+  margin: 0 0 2rem;
+  line-height: var(--line-height-tight);
+}
+
+.skeletons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.skeletonCard {
+  background: var(--color-beige);
+  border: 1px solid rgba(60, 36, 28, 0.12);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cardWrapper {
+  contain: layout style;
+}
+
+.topSpacer {
+  /* Пустой spacer вместо выгруженных карточек сверху */
+  contain: strict;
+}
+
+/* Sentinel */
+.sentinel {
+  height: 1px;
+  pointer-events: none;
+}
+
+.endMessage {
+  text-align: center;
+  color: rgba(60, 36, 28, 0.4);
+  font-size: var(--font-size-sm);
+  padding: 1.5rem 0 2rem;
+  margin: 0;
+}

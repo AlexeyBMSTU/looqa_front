@@ -1,4 +1,3 @@
-import { apiService } from '@/core/api/APIService';
 import { registrationSchema } from '@/features/reg/schemas';
 import {
   RegistrationData,
@@ -8,6 +7,7 @@ import {
 import { action, makeAutoObservable } from 'mobx';
 import { z } from 'zod';
 import { ROLES } from '../consts';
+import { regAdapter } from '../adapters';
 
 class RegModel {
   role: RoleType = ROLES.OWNER;
@@ -38,14 +38,8 @@ class RegModel {
   @action.bound
   async requestAuth(body: RequestAuthProps) {
     try {
-      console.log(body);
       const validatedData = this.validateRegistrationData(body);
-
-      const requestParams = {
-        url: '/auth/reg/',
-        body: validatedData,
-      };
-      await apiService.post(requestParams);
+      await regAdapter(validatedData as RequestAuthProps);
     } catch (error) {
       throw new Error('RegStore::requestAuth', { cause: error });
     }

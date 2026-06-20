@@ -8,6 +8,7 @@ export function Footer() {
         <div className={styles.grid}>
           <div className={styles.brand}>
             <div className={styles.logo}>
+              <span className={styles.logoIcon}>L</span>
               <span className={styles.logoText}>LooQA</span>
             </div>
             <p className={styles.brandDescription}>
@@ -48,6 +49,7 @@ export function Footer() {
 
         <div className={styles.bottom}>
           <p className={styles.copyright}>© 2026 LooQA. Все права защищены.</p>
+          <p className={styles.madeWith}>Made with ♥ in Russia</p>
         </div>
       </div>
     </footer>

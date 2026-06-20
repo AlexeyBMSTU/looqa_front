@@ -1,0 +1,14 @@
+.link {
+  color: var(--color-brown);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(60, 36, 28, 0.25);
+  transition:
+    border-color 0.15s,
+    opacity 0.15s;
+}
+
+.link:hover {
+  border-bottom-color: var(--color-brown);
+  opacity: 0.75;
+}

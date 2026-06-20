@@ -1,0 +1,48 @@
+export interface Author {
+  id: string;
+  username: string;
+  avatarInitials: string; // e.g. "AB" from username
+}
+
+export interface Comment {
+  id: string;
+  author: Author;
+  text: string;
+  createdAt: string; // ISO date string
+}
+
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  category: string; // e.g. "Мобильное приложение", "Веб-сервис"
+  author: Author;
+  likesCount: number;
+  isLiked: boolean; // current user liked
+  comments: Comment[];
+  tags: string[];
+  createdAt: string;
+  testingSlots: number; // how many testers are still needed
+}
+
+export interface FeedResponse {
+  projects: Project[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
+export interface LikeResponse {
+  projectId: string;
+  likesCount: number;
+  isLiked: boolean;
+}
+
+export interface AddCommentRequest {
+  projectId: string;
+  text: string;
+}
+
+export interface AddCommentResponse {
+  comment: Comment;
+}

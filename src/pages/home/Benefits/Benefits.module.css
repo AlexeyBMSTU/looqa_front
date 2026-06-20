@@ -5,74 +5,99 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  gap: 5rem;
+  align-items: flex-start;
 }
 
-.header {
-  text-align: center;
-  margin-bottom: 4rem;
+/* Left column */
+.left {
+  max-width: 400px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 6rem;
 }
 
 .title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--color-brown);
   margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
-.subtitle {
-  font-size: 1.125rem;
-  color: #6b7280;
-  max-width: 600px;
-  margin: 0 auto;
+.description {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: rgba(60, 36, 28, 0.7);
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+/* Right column */
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.card {
-  padding: 2rem;
-  background: #fafafa;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  transition: all 0.3s;
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(60, 36, 28, 0.15);
 }
 
-.card:hover {
-  border-color: #4f46e5;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+.item:first-child {
+  padding-top: 0;
 }
 
-.cardIcon {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-  border-radius: 10px;
+.item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.badge {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--color-beige);
+  color: var(--color-brown);
+  font-size: 0.875rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
 }
 
-.cardIcon svg {
-  width: 24px;
-  height: 24px;
-  color: white;
+.itemContent {
+  flex: 1;
 }
 
-.cardTitle {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 0.75rem;
+.itemTitle {
+  font-size: 1.1875rem;
+  font-weight: 700;
+  color: var(--color-brown);
+  margin-bottom: 0.5rem;
 }
 
-.cardDescription {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #6b7280;
+.itemDescription {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: rgba(60, 36, 28, 0.7);
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .left {
+    max-width: 100%;
+    position: static;
+  }
 }
 
 @media (max-width: 768px) {
@@ -82,9 +107,5 @@
 
   .title {
     font-size: 2rem;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
   }
 }

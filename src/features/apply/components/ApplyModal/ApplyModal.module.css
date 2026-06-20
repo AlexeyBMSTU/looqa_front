@@ -1,0 +1,199 @@
+.root {
+  padding: 1.5rem;
+  background-color: var(--color-beige);
+  color: var(--color-brown);
+  min-width: 320px;
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.projectTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-brown);
+  line-height: 1.3;
+}
+
+.categoryBadge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.2rem 0.65rem;
+  border-radius: 20px;
+  background-color: var(--color-blue);
+  color: var(--color-brown);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* ── Divider ── */
+.divider {
+  border: none;
+  border-top: 1px solid rgba(60, 36, 28, 0.1);
+  margin: 0 0 1.25rem;
+}
+
+/* ── Fields ── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.fieldLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-brown);
+  opacity: 0.8;
+}
+
+/* ── Experience toggle ── */
+.toggleGroup {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.toggleBtn {
+  flex: 1;
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(60, 36, 28, 0.2);
+  background: transparent;
+  color: var(--color-brown);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+}
+
+.toggleBtn:hover:not(.toggleBtnActive) {
+  border-color: rgba(60, 36, 28, 0.4);
+}
+
+.toggleBtnActive {
+  background-color: var(--color-brown);
+  color: var(--color-beige);
+  border-color: var(--color-brown);
+}
+
+/* ── Textarea ── */
+.textarea :global(.ant-input) {
+  background-color: rgba(60, 36, 28, 0.04);
+  border-color: rgba(60, 36, 28, 0.2);
+  color: var(--color-brown);
+  resize: none;
+}
+
+.textarea :global(.ant-input::placeholder) {
+  color: rgba(60, 36, 28, 0.4);
+}
+
+.textarea :global(.ant-input:focus),
+.textarea :global(.ant-input-focused) {
+  border-color: var(--color-brown);
+  box-shadow: 0 0 0 2px rgba(60, 36, 28, 0.1);
+}
+
+/* ── Error ── */
+.error {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  color: #c0392b;
+}
+
+/* ── Submit button ── */
+.submitButton {
+  width: 100%;
+  height: 42px;
+  background-color: var(--color-brown) !important;
+  color: var(--color-beige) !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  margin-bottom: 0.75rem;
+}
+
+.submitButton:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
+/* ── Hint ── */
+.hint {
+  margin: 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(60, 36, 28, 0.5);
+}
+
+/* ── Success phase ── */
+.successPhase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0 0.25rem;
+  text-align: center;
+}
+
+.successIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: var(--color-blue);
+  color: var(--color-brown);
+  font-size: 2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.successTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-brown);
+}
+
+.successText {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(60, 36, 28, 0.75);
+  line-height: 1.5;
+}
+
+.successText strong {
+  color: var(--color-brown);
+}
+
+/* ── Close button ── */
+.closeButton {
+  width: 100%;
+  height: 42px;
+  margin-top: 0.5rem;
+  background-color: var(--color-brown) !important;
+  color: var(--color-beige) !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.closeButton:hover {
+  opacity: 0.88;
+}

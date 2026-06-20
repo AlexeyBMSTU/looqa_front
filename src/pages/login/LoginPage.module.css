@@ -1,12 +1,18 @@
 .component {
-  height: 100vh;
+  min-height: calc(100vh - var(--navbar-padding));
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 2rem;
 }
 
 .root {
+  background: var(--color-beige);
+  padding: 2.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(60, 36, 28, 0.15);
+  box-shadow: 0 20px 60px rgba(60, 36, 28, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +21,8 @@
 }
 
 .form {
-  width: 460px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .passwordStrength {

@@ -1,0 +1,61 @@
+import type { UserProfile, AppliedProject } from '../types';
+
+export const MOCK_PROFILE: UserProfile = {
+  id: 'current-user',
+  username: 'test_user_42',
+  displayName: 'Алексей Тестировщиков',
+  bio: 'Тестирую продукты с 2022 года. Интересуют мобильные приложения и SaaS.',
+  email: null,
+  emailVerified: false,
+  avatarInitials: 'АТ',
+  avatarColor: '#3C241C',
+  role: 'qa',
+  createdAt: '2024-03-15T10:00:00Z',
+};
+
+export const MOCK_APPLICATIONS: AppliedProject[] = [
+  {
+    id: 'app-1',
+    projectId: '1',
+    projectTitle: 'TaskFlow — менеджер задач для фрилансеров',
+    projectCategory: 'Веб-сервис',
+    authorUsername: 'Pavel_dev',
+    experience: 'some',
+    comment: 'Работаю фрилансером, буду рад протестировать',
+    status: 'accepted',
+    appliedAt: '2026-06-11T14:00:00Z',
+  },
+  {
+    id: 'app-2',
+    projectId: '2',
+    projectTitle: 'EcoTrack — трекер углеродного следа',
+    projectCategory: 'Мобильное приложение',
+    authorUsername: 'green_anna',
+    experience: 'none',
+    comment: '',
+    status: 'pending',
+    appliedAt: '2026-06-13T09:30:00Z',
+  },
+  {
+    id: 'app-3',
+    projectId: '4',
+    projectTitle: 'MoodBoard AI — генератор мудбордов',
+    projectCategory: 'Веб-сервис',
+    authorUsername: 'design_kate',
+    experience: 'expert',
+    comment: 'Занимаюсь дизайном, хочу оценить UX',
+    status: 'rejected',
+    appliedAt: '2026-06-15T16:45:00Z',
+  },
+  {
+    id: 'app-4',
+    projectId: '7',
+    projectTitle: 'HabitLoop — трекер привычек с ИИ-коучем',
+    projectCategory: 'Мобильное приложение',
+    authorUsername: 'habit_hacker',
+    experience: 'some',
+    comment: 'Пользуюсь трекерами привычек, интересно сравнить',
+    status: 'pending',
+    appliedAt: '2026-06-18T11:00:00Z',
+  },
+];

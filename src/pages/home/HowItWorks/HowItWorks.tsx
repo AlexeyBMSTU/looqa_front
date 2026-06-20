@@ -1,30 +1,29 @@
-import { Card } from '@/shared/components/Card/Card';
 import styles from './HowItWorks.module.css';
 
-export const HowItWorks = () => {
-  const steps = [
-    {
-      title: 'Разместите продукт',
-      description: 'Опишите ваш продукт или загрузите макет для тестирования',
-      number: '01',
-    },
-    {
-      title: 'Найдите тестировщиков',
-      description: 'Тестировщики увидят ваш продукт и начнут работу',
-      number: '02',
-    },
-    {
-      title: 'Получите обратную связь',
-      description: 'Соберите мнения и предложения по улучшению',
-      number: '03',
-    },
-    {
-      title: 'Улучшите продукт',
-      description: 'Используйте отзывы для развития вашего проекта',
-      number: '04',
-    },
-  ];
+const steps = [
+  {
+    number: '01',
+    title: 'Разместите продукт',
+    description: 'Опишите ваш продукт или загрузите макет для тестирования',
+  },
+  {
+    number: '02',
+    title: 'Найдите тестировщиков',
+    description: 'Тестировщики увидят ваш продукт и начнут работу',
+  },
+  {
+    number: '03',
+    title: 'Получите обратную связь',
+    description: 'Соберите мнения и предложения по улучшению',
+  },
+  {
+    number: '04',
+    title: 'Улучшите продукт',
+    description: 'Используйте отзывы для развития вашего проекта',
+  },
+];
 
+export const HowItWorks = () => {
   return (
     <section className={styles.section} id="how-it-works">
       <div className={styles.container}>
@@ -36,13 +35,15 @@ export const HowItWorks = () => {
         </div>
 
         <div className={styles.grid}>
-          {steps.map((step, index) => {
-            return (
-              <div key={index} className={styles.step}>
-                <Card title={step.title} description={step.description} />
+          {steps.map(step => (
+            <div key={step.number} className={styles.card}>
+              <span className={styles.stepNumber}>{step.number}</span>
+              <div className={styles.cardBody}>
+                <h3 className={styles.stepTitle}>{step.title}</h3>
+                <p className={styles.stepDescription}>{step.description}</p>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </section>

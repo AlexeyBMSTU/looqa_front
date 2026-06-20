@@ -1,5 +1,5 @@
-import { apiService } from '@/core/api/APIService';
 import { action, makeAutoObservable } from 'mobx';
+import { loginAdapter } from '../adapters';
 import { RequestAuthProps } from '../types';
 
 class LoginModel {
@@ -10,11 +10,7 @@ class LoginModel {
   @action.bound
   async requestAuth(body: RequestAuthProps) {
     try {
-      const requestParams = {
-        url: '/auth/login/',
-        body,
-      };
-      await apiService.post(requestParams);
+      await loginAdapter(body);
     } catch (error) {
       throw new Error('LoginModel::requestAuth', { cause: error });
     }
