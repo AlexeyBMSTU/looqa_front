@@ -31,6 +31,12 @@ async function mockGetFeed(
   return { projects, total: mockProjects.length, page, pageSize };
 }
 
+async function mockGetComments(projectId: string): Promise<Comment[]> {
+  await delay(200);
+  const project = mockProjects.find(p => p.id === projectId);
+  return project ? [...project.comments] : [];
+}
+
 async function mockToggleLike(projectId: string): Promise<LikeResponse> {
   await delay(200);
   const project = mockProjects.find(p => p.id === projectId);
@@ -66,8 +72,7 @@ export async function getFeedAdapter(
   page = 1,
   pageSize = 10
 ): Promise<FeedResponse> {
-  if (getFlag(FLAGS.MOCK_FEED, true)) {
-    // default true — always use mock until backend ready
+  if (getFlag(FLAGS.MOCK_FEED)) {
     return mockGetFeed(page, pageSize);
   }
   return apiService.get<FeedResponse>({
@@ -76,10 +81,19 @@ export async function getFeedAdapter(
   });
 }
 
+export async function getCommentsAdapter(
+  projectId: string
+): Promise<Comment[]> {
+  if (getFlag(FLAGS.MOCK_FEED)) {
+    return mockGetComments(projectId);
+  }
+  return apiService.get<Comment[]>({ url: `/feed/${projectId}/comments/` });
+}
+
 export async function toggleLikeAdapter(
   projectId: string
 ): Promise<LikeResponse> {
-  if (getFlag(FLAGS.MOCK_FEED, true)) {
+  if (getFlag(FLAGS.MOCK_FEED)) {
     return mockToggleLike(projectId);
   }
   return apiService.post<LikeResponse>({ url: `/feed/${projectId}/like/` });
@@ -88,7 +102,7 @@ export async function toggleLikeAdapter(
 export async function addCommentAdapter(
   req: AddCommentRequest
 ): Promise<AddCommentResponse> {
-  if (getFlag(FLAGS.MOCK_FEED, true)) {
+  if (getFlag(FLAGS.MOCK_FEED)) {
     return mockAddComment(req);
   }
   return apiService.post<AddCommentResponse>({

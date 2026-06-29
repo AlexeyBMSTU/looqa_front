@@ -36,7 +36,12 @@ export const ApplicationsTab = observer(() => {
       {applications.map(app => (
         <div key={app.id} className={styles.card}>
           <div className={styles.cardHeader}>
-            <span className={styles.projectTitle}>{app.projectTitle}</span>
+            <Link
+              to={`/projects/${app.projectId}`}
+              className={styles.projectTitle}
+            >
+              {app.projectTitle}
+            </Link>
             <div className={styles.badges}>
               <span className={styles.categoryBadge}>
                 {app.projectCategory}

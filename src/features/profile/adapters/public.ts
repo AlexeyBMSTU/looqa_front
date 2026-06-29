@@ -15,6 +15,6 @@ async function mockGetPublicProfile(
 export async function getPublicProfileAdapter(
   username: string
 ): Promise<PublicProfileResponse> {
-  if (getFlag(FLAGS.MOCK_PROFILE, true)) return mockGetPublicProfile(username);
+  if (getFlag(FLAGS.MOCK_PROFILE)) return mockGetPublicProfile(username);
   return apiService.get<PublicProfileResponse>({ url: `/users/${username}/` });
 }

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { Skeleton, Button } from 'antd';
 import { publicProfileModel } from '@/features/profile/models/public';
+import { authStore } from '@/features/auth/store';
 import { ProjectCard } from '@/pages/feed/components/ProjectCard/ProjectCard';
 import styles from './UserProfilePage.module.css';
 
@@ -18,11 +19,20 @@ export const UserProfilePage = observer(() => {
   const { username = '' } = useParams<{ username: string }>();
   const navigate = useNavigate();
 
+  // Определяем что это профиль текущего пользователя
+  const isMyProfile =
+    authStore.isAuthenticated && authStore.username === username;
+
   useEffect(() => {
+    // Если это мой профиль — редиректим на /profile/
+    if (isMyProfile) {
+      navigate('/profile/', { replace: true });
+      return;
+    }
     if (username) {
       publicProfileModel.load(username);
     }
-  }, [username]);
+  }, [username, isMyProfile, navigate]);
 
   const { profile, projects, stats, isLoading, error } = publicProfileModel;
 

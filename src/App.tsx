@@ -7,16 +7,19 @@ import { ScrollComponent } from './shared/components/ScrollComponent/ScrollCompo
 import { StyleProvider } from '@ant-design/cssinjs';
 import { ModalRoot } from './shared/components/Modal';
 import { ConfigProvider } from 'antd';
+import ruRU from 'antd/locale/ru_RU';
 
 function App() {
   return (
     <StyleProvider layer>
       <ConfigProvider
+        locale={ruRU}
         theme={{
           token: {
             colorPrimary: '#3C241C',
             colorBgContainer: '#E0D1BB',
             colorBgBase: '#B7CEE4',
+            colorBgElevated: '#E0D1BB',
             colorText: '#3C241C',
             colorBorder: 'rgba(60, 36, 28, 0.2)',
             colorBgLayout: '#B7CEE4',

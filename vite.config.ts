@@ -20,4 +20,13 @@ export default defineConfig({
       generateScopedName: '[name]__[local]___[hash:base64:5]',
     },
   },
+  server: {
+    proxy: {
+      // Все запросы /api/* Vite перенаправляет на nginx (:80)
+      '/api': {
+        target: 'http://localhost:80',
+        changeOrigin: true,
+      },
+    },
+  },
 })

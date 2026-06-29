@@ -113,6 +113,94 @@
   opacity: 0.92;
 }
 
+.createBtn.createBtn {
+  background-color: var(--color-brown) !important;
+  color: var(--color-beige) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  padding: 0 1.25rem !important;
+  height: 2.25rem !important;
+  font-size: 0.9375rem;
+  transition: opacity 0.2s;
+}
+
+.createBtn.createBtn:hover {
+  opacity: 0.88;
+}
+
+/* Кнопка Регистрация */
+.registerBtn.registerBtn {
+  background: transparent !important;
+  color: var(--color-brown) !important;
+  border: 1px solid rgba(60, 36, 28, 0.35) !important;
+  border-radius: 8px !important;
+  padding: 0 1.25rem !important;
+  height: 2.25rem !important;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.registerBtn.registerBtn:hover {
+  background: rgba(60, 36, 28, 0.06) !important;
+}
+
+/* Кнопка Выйти */
+.logoutBtn.logoutBtn {
+  background: transparent !important;
+  color: rgba(60, 36, 28, 0.6) !important;
+  border: 1px solid rgba(60, 36, 28, 0.2) !important;
+  border-radius: 8px !important;
+  padding: 0 1rem !important;
+  height: 2.25rem !important;
+  transition: all 0.2s;
+}
+
+.logoutBtn.logoutBtn:hover {
+  color: var(--color-brown) !important;
+  border-color: rgba(60, 36, 28, 0.4) !important;
+}
+
+/* Аватарка + имя пользователя */
+.userBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  padding: 0.25rem 0.625rem;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.userBtn:hover {
+  background: rgba(60, 36, 28, 0.07);
+}
+
+.userAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-brown);
+  color: var(--color-beige);
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+
+.userName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-brown);
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 767px) {
   .navLinks {

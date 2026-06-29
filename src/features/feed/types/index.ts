@@ -1,3 +1,18 @@
+export interface Attachment {
+  id: string;
+  name: string; // имя файла, например "mockup_v2.fig"
+  url: string; // ссылка на скачивание
+  type: 'figma' | 'pdf' | 'zip' | 'link' | 'other';
+}
+
+export interface Review {
+  id: string;
+  author: Author;
+  rating: number; // 1-5
+  text: string;
+  createdAt: string;
+}
+
 export interface Author {
   id: string;
   username: string;
@@ -23,6 +38,10 @@ export interface Project {
   tags: string[];
   createdAt: string;
   testingSlots: number; // how many testers are still needed
+  url?: string;
+  idea?: string;
+  attachments?: Attachment[];
+  reviews?: Review[];
 }
 
 export interface FeedResponse {

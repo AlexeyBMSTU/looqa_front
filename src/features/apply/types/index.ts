@@ -8,4 +8,5 @@ export interface ApplyRequest {
 export interface ApplyResponse {
   success: boolean;
   message: string;
+  error?: string;
 }

@@ -1,0 +1,607 @@
+.page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* ── Back button ── */
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(60, 36, 28, 0.6);
+  font-size: 0.9375rem;
+  font-family: inherit;
+  padding: 0;
+  margin-bottom: 1.5rem;
+  transition: color 0.2s;
+}
+
+.backBtn:hover {
+  color: var(--color-brown);
+}
+
+/* ── Title ── */
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-brown);
+  margin: 0 0 1rem;
+  line-height: 1.2;
+}
+
+/* ── Badges row ── */
+.badgesRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.categoryBadge {
+  background-color: var(--color-blue);
+  color: var(--color-brown);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+}
+
+.tag {
+  font-size: 0.8125rem;
+  color: rgba(60, 36, 28, 0.65);
+  background: rgba(60, 36, 28, 0.07);
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+}
+
+/* ── Meta row ── */
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: rgba(60, 36, 28, 0.55);
+  margin-bottom: 1.25rem;
+}
+
+.metaSep {
+  color: rgba(60, 36, 28, 0.3);
+}
+
+.date {
+  color: rgba(60, 36, 28, 0.55);
+}
+
+/* ── Description ── */
+.description {
+  font-size: 1rem;
+  color: rgba(60, 36, 28, 0.8);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── Divider ── */
+.divider {
+  border: none;
+  border-top: 1px solid rgba(60, 36, 28, 0.1);
+  margin: 1.75rem 0;
+}
+
+/* ── Section ── */
+.section {
+  margin: 0;
+}
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-brown);
+  margin: 0 0 0.75rem;
+}
+
+.avgRating {
+  font-weight: 600;
+  color: var(--color-brown);
+}
+
+.sectionText {
+  font-size: 0.9375rem;
+  color: rgba(60, 36, 28, 0.8);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── Product link ── */
+.productLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: rgba(183, 206, 228, 0.3);
+  color: var(--color-brown);
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: background 0.2s;
+  word-break: break-all;
+}
+
+.productLink:hover {
+  background: rgba(183, 206, 228, 0.5);
+  color: var(--color-brown);
+}
+
+/* ── Attachments ── */
+.attachmentList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.attachmentItem {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.attachmentIcon {
+  font-size: 1.125rem;
+  flex-shrink: 0;
+}
+
+.attachmentName {
+  flex: 1;
+  font-size: 0.9375rem;
+  color: rgba(60, 36, 28, 0.85);
+  min-width: 0;
+  word-break: break-all;
+}
+
+.downloadBtn {
+  display: inline-block;
+  font-size: 0.8125rem;
+  color: var(--color-brown);
+  border: 1px solid rgba(60, 36, 28, 0.4);
+  border-radius: 6px;
+  padding: 0.2rem 0.7rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background 0.18s,
+    border-color 0.18s;
+  flex-shrink: 0;
+}
+
+.downloadBtn:hover {
+  background: rgba(60, 36, 28, 0.06);
+  border-color: var(--color-brown);
+  color: var(--color-brown);
+}
+
+/* ── Reviews list ── */
+.reviewList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.reviewItem {
+  display: flex;
+  gap: 0.875rem;
+}
+
+.reviewAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-blue);
+  color: var(--color-brown);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.reviewBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.reviewMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.375rem;
+}
+
+.reviewDate {
+  font-size: 0.8125rem;
+  color: rgba(60, 36, 28, 0.45);
+}
+
+.stars {
+  font-size: 0.9375rem;
+  letter-spacing: 0.05em;
+}
+
+.starFilled {
+  color: #c8a14a;
+}
+
+.starEmpty {
+  color: rgba(60, 36, 28, 0.2);
+}
+
+.reviewText {
+  font-size: 0.9375rem;
+  color: rgba(60, 36, 28, 0.8);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.emptyReviews {
+  font-size: 0.9375rem;
+  color: rgba(60, 36, 28, 0.4);
+  margin: 0;
+}
+
+/* ── Review form ── */
+.reviewForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  align-items: flex-start;
+}
+
+.reviewTextarea {
+  width: 100%;
+  font-family: inherit;
+}
+
+.submitReviewBtn.submitReviewBtn {
+  background: var(--color-brown) !important;
+  color: var(--color-beige) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  padding: 0 1.5rem !important;
+}
+
+.submitReviewBtn.submitReviewBtn:hover {
+  opacity: 0.88;
+}
+
+.reviewSuccess {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-brown);
+}
+
+.reviewSuccessIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(60, 36, 28, 0.12);
+  font-size: 0.875rem;
+}
+
+/* ── Skeleton / error ── */
+.skeletonWrap {
+  padding: 2rem;
+  background: var(--color-beige);
+  border-radius: 16px;
+  border: 1px solid rgba(60, 36, 28, 0.1);
+}
+
+.errorMsg {
+  color: #c0392b;
+  font-size: 1rem;
+  text-align: center;
+  padding: 3rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 767px) {
+  .page {
+    padding: 1.25rem 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+}
+
+/* ── Заявки на тестирование ── */
+.applicationsCount {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: rgba(60, 36, 28, 0.5);
+  margin-left: 0.25rem;
+}
+
+.applicationList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.applicationItem {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.875rem 1rem;
+  background: rgba(183, 206, 228, 0.15);
+  border: 1px solid rgba(60, 36, 28, 0.1);
+  border-radius: 10px;
+}
+
+.applicationLeft {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.applicationAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-brown);
+  color: var(--color-beige);
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.applicationInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.applicationMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.25rem;
+}
+
+.applicationExperience {
+  font-size: 0.75rem;
+  color: rgba(60, 36, 28, 0.55);
+  background: rgba(60, 36, 28, 0.07);
+  padding: 0.15rem 0.5rem;
+  border-radius: 50px;
+}
+
+.applicationStatus {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 50px;
+}
+
+.appStatus_pending {
+  background: rgba(183, 206, 228, 0.4);
+  color: var(--color-brown);
+}
+.appStatus_accepted {
+  background: rgba(60, 36, 28, 0.08);
+  color: var(--color-brown);
+  border: 1px solid rgba(60, 36, 28, 0.25);
+}
+.appStatus_rejected {
+  background: rgba(60, 36, 28, 0.05);
+  color: rgba(60, 36, 28, 0.4);
+}
+
+.applicationComment {
+  font-size: 0.8125rem;
+  color: rgba(60, 36, 28, 0.6);
+  margin: 0;
+  font-style: italic;
+}
+
+.applicationActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.acceptBtn {
+  background: var(--color-brown) !important;
+  color: var(--color-beige) !important;
+  border: none !important;
+  border-radius: 6px !important;
+}
+
+.rejectBtn {
+  background: transparent !important;
+  color: rgba(60, 36, 28, 0.6) !important;
+  border: 1px solid rgba(60, 36, 28, 0.25) !important;
+  border-radius: 6px !important;
+}
+
+.rejectBtn:hover {
+  color: var(--color-brown) !important;
+  border-color: var(--color-brown) !important;
+}
+
+/* ── Queue layout ── */
+.queueLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.queueColumn {
+  background: rgba(183, 206, 228, 0.12);
+  border: 1px solid rgba(60, 36, 28, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.queueColumnAccepted {
+  background: rgba(60, 36, 28, 0.04);
+  border-color: rgba(60, 36, 28, 0.12);
+}
+
+.queueColumnTitle {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-brown);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.queueBadge {
+  background: rgba(60, 36, 28, 0.1);
+  color: var(--color-brown);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  border-radius: 50px;
+  letter-spacing: 0;
+}
+
+.queueEmpty {
+  font-size: var(--font-size-sm);
+  color: rgba(60, 36, 28, 0.4);
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.queueCard {
+  background: var(--color-beige);
+  border: 1px solid rgba(60, 36, 28, 0.1);
+  border-radius: 8px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.queueCardTop {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.queueAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-brown);
+  color: var(--color-beige);
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.queueUsername {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-brown);
+  text-decoration: none;
+}
+
+.queueUsername:hover {
+  text-decoration: underline;
+}
+
+.queueExperience {
+  margin-left: auto;
+  font-size: 0.7rem;
+  color: rgba(60, 36, 28, 0.5);
+  background: rgba(60, 36, 28, 0.07);
+  padding: 0.1rem 0.4rem;
+  border-radius: 50px;
+}
+
+.queueComment {
+  font-size: 0.8125rem;
+  color: rgba(60, 36, 28, 0.65);
+  margin: 0;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.queueActions {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+}
+
+.queueAcceptBtn {
+  background: var(--color-brown) !important;
+  color: var(--color-beige) !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-size: 0.75rem !important;
+}
+
+.queueRejectBtn {
+  background: transparent !important;
+  color: rgba(60, 36, 28, 0.6) !important;
+  border: 1px solid rgba(60, 36, 28, 0.2) !important;
+  border-radius: 6px !important;
+  font-size: 0.75rem !important;
+}
+
+.queueRejectBtn:hover {
+  color: var(--color-brown) !important;
+  border-color: rgba(60, 36, 28, 0.4) !important;
+}
+
+.reviewGated {
+  font-size: var(--font-size-sm);
+  color: rgba(60, 36, 28, 0.45);
+  padding: 0.75rem;
+  background: rgba(60, 36, 28, 0.04);
+  border-radius: 8px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .queueLayout {
+    grid-template-columns: 1fr;
+  }
+}

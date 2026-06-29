@@ -1,17 +1,29 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Flex, Form } from 'antd';
+import { Button, Checkbox, Flex, Form, message } from 'antd';
 import Title from 'antd/es/typography/Title';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import styles from './LoginPage.module.css';
 import { PageComponent } from '@/shared/components/PageComponent/PageComponent';
 import { InputComponent } from '@/shared/components/Input/Input';
 import { loginModel } from '@/features/login/models';
 import { RequestAuthProps } from '@/features/login/types';
+import { useState } from 'react';
 
 export const LoginPage = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const onFinish = async (data: RequestAuthProps) => {
-    console.log('Received values of form: ', data);
-    await loginModel.requestAuth(data);
+    setLoading(true);
+    try {
+      await loginModel.requestAuth(data);
+      message.success('Добро пожаловать!');
+      navigate('/feed/');
+    } catch {
+      message.error('Неверное имя пользователя или пароль');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -29,7 +41,7 @@ export const LoginPage = () => {
               <InputComponent
                 size="large"
                 prefix={<UserOutlined />}
-                placeholder="Имя"
+                placeholder="Имя пользователя"
               />
             </Form.Item>
             <Form.Item name="password">
@@ -51,7 +63,13 @@ export const LoginPage = () => {
 
             <Form.Item>
               <Flex vertical>
-                <Button size="large" block type="primary" htmlType="submit">
+                <Button
+                  size="large"
+                  block
+                  type="primary"
+                  htmlType="submit"
+                  loading={loading}
+                >
                   Войти
                 </Button>
                 <p>

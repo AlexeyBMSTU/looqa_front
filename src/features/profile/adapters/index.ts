@@ -24,6 +24,7 @@ async function mockGetProfile(): Promise<ProfileResponse> {
   return {
     profile: { ...mockProfile },
     applications: mockApplications.map(a => ({ ...a })),
+    projects: [],
   };
 }
 
@@ -55,14 +56,14 @@ async function mockUpdatePassword(
 // --- Public adapter functions ---
 
 export async function getProfileAdapter(): Promise<ProfileResponse> {
-  if (getFlag(FLAGS.MOCK_PROFILE, true)) return mockGetProfile();
+  if (getFlag(FLAGS.MOCK_PROFILE)) return mockGetProfile();
   return apiService.get<ProfileResponse>({ url: '/profile/' });
 }
 
 export async function updateProfileAdapter(
   req: UpdateProfileRequest
 ): Promise<UpdateProfileResponse> {
-  if (getFlag(FLAGS.MOCK_PROFILE, true)) return mockUpdateProfile(req);
+  if (getFlag(FLAGS.MOCK_PROFILE)) return mockUpdateProfile(req);
   return apiService.patch<UpdateProfileResponse>({
     url: '/profile/',
     body: req,
@@ -72,7 +73,7 @@ export async function updateProfileAdapter(
 export async function updateEmailAdapter(
   req: UpdateEmailRequest
 ): Promise<{ success: boolean }> {
-  if (getFlag(FLAGS.MOCK_PROFILE, true)) return mockUpdateEmail();
+  if (getFlag(FLAGS.MOCK_PROFILE)) return mockUpdateEmail();
   return apiService.post<{ success: boolean }>({
     url: '/profile/email/',
     body: req,
@@ -82,7 +83,7 @@ export async function updateEmailAdapter(
 export async function updatePasswordAdapter(
   req: UpdatePasswordRequest
 ): Promise<{ success: boolean }> {
-  if (getFlag(FLAGS.MOCK_PROFILE, true)) return mockUpdatePassword(req);
+  if (getFlag(FLAGS.MOCK_PROFILE)) return mockUpdatePassword(req);
   return apiService.post<{ success: boolean }>({
     url: '/profile/password/',
     body: req,

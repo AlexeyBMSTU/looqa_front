@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Button, Input } from 'antd';
 import { applyModel } from '@/features/apply/models';
@@ -29,6 +29,12 @@ export const ApplyModal = observer(({ project, modalId }: ApplyModalProps) => {
       comment,
     });
   };
+
+  useEffect(() => {
+    return () => {
+      applyModel.reset();
+    };
+  }, []);
 
   const handleClose = () => {
     modalStore.close(modalId);

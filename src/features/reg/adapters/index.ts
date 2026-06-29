@@ -1,5 +1,6 @@
 import { apiService } from '@/core/api/APIService';
 import { getFlag, FLAGS } from '@/core/featureFlags';
+import { authStore } from '@/features/auth/store';
 import { RequestAuthProps } from '../types';
 
 export interface RegResponse {
@@ -19,8 +20,10 @@ async function mockReg(body: RequestAuthProps): Promise<RegResponse> {
 }
 
 export async function regAdapter(body: RequestAuthProps): Promise<RegResponse> {
-  if (getFlag(FLAGS.MOCK_AUTH)) {
-    return mockReg(body);
-  }
-  return apiService.post<RegResponse>({ url: '/auth/reg/', body });
+  const res = getFlag(FLAGS.MOCK_AUTH)
+    ? await mockReg(body)
+    : await apiService.post<RegResponse>({ url: '/auth/reg/', body });
+
+  if (res.token) authStore.setToken(res.token);
+  return res;
 }

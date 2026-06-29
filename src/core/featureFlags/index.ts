@@ -25,4 +25,5 @@ export const FLAGS = {
   MOCK_FEED: 'mock_feed',
   MOCK_APPLY: 'mock_apply',
   MOCK_PROFILE: 'mock_profile',
+  MOCK_CREATE_PROJECT: 'mock_create_project',
 } as const;

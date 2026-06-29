@@ -4,6 +4,7 @@ import {
   getFeedAdapter,
   toggleLikeAdapter,
   addCommentAdapter,
+  getCommentsAdapter,
 } from '../adapters';
 
 const PAGE_SIZE = 4;
@@ -13,6 +14,8 @@ class FeedModel {
   isLoading = false;
   isLoadingMore = false;
   total = 0;
+  // id проекта, комментарии которого сейчас загружаются
+  loadingCommentsFor: string | null = null;
   private page = 1;
 
   constructor() {
@@ -96,6 +99,24 @@ class FeedModel {
         project.comments = [...project.comments, res.comment];
       }
     });
+  }
+
+  async loadComments(projectId: string): Promise<void> {
+    runInAction(() => {
+      this.loadingCommentsFor = projectId;
+    });
+    try {
+      const comments = await getCommentsAdapter(projectId);
+      runInAction(() => {
+        const project = this.projects.find(p => p.id === projectId);
+        if (project) project.comments = comments;
+        this.loadingCommentsFor = null;
+      });
+    } catch {
+      runInAction(() => {
+        this.loadingCommentsFor = null;
+      });
+    }
   }
 }
 

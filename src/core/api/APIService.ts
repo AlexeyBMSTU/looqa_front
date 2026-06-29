@@ -1,4 +1,5 @@
 import { GENERAL_URL } from '@/env';
+import { authStore } from '@/features/auth/store';
 
 interface DataProps {
   url: string;
@@ -12,12 +13,20 @@ interface RequestProps extends DataProps {
 
 class ApiService {
   private baseUrl: string;
-  private headers = {
-    'Content-Type': 'application/json',
-  };
 
   constructor(baseUrl: string = '') {
     this.baseUrl = baseUrl;
+  }
+
+  private buildHeaders(): Record<string, string> {
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+    };
+    const token = authStore.token;
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    return headers;
   }
 
   private async request<T>({
@@ -27,7 +36,6 @@ class ApiService {
     body,
   }: RequestProps): Promise<T> {
     const apiUrl = `/api${url}`;
-
     let requestUrl = `${this.baseUrl}${apiUrl}`;
 
     if (query) {
@@ -40,7 +48,7 @@ class ApiService {
 
     const response = await fetch(requestUrl, {
       method,
-      headers: this.headers,
+      headers: this.buildHeaders(),
       body: body ? JSON.stringify(body) : null,
       mode: 'cors',
       credentials: 'include',
@@ -48,7 +56,11 @@ class ApiService {
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`HTTP error ${response.status}: ${errorText}`);
+      const error = new Error(
+        `HTTP error ${response.status}: ${errorText}`
+      ) as Error & { status: number };
+      error.status = response.status;
+      throw error;
     }
 
     return await response.json();

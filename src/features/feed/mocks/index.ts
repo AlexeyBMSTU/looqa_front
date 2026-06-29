@@ -13,6 +13,28 @@ export const MOCK_PROJECTS: Project[] = [
     tags: ['продуктивность', 'фриланс', 'задачи'],
     createdAt: '2026-06-10T10:00:00Z',
     testingSlots: 8,
+    url: 'https://taskflow-demo.looqa.dev',
+    idea: 'Фрилансеры теряют до 2 часов в день на переключение между клиентами и трекерами. TaskFlow объединяет всё в одном месте: задачи, тайм-трекинг, счета.',
+    attachments: [
+      { id: 'a1', name: 'TaskFlow_Mockup.fig', url: '#', type: 'figma' },
+      { id: 'a2', name: 'TaskFlow_Brief.pdf', url: '#', type: 'pdf' },
+    ],
+    reviews: [
+      {
+        id: 'r1',
+        author: { id: 'u2', username: 'Maria_qa', avatarInitials: 'MQ' },
+        rating: 5,
+        text: 'Очень удобно! Особенно понравилась быстрая смена клиента без потери контекста.',
+        createdAt: '2026-06-12T10:00:00Z',
+      },
+      {
+        id: 'r2',
+        author: { id: 'u5', username: 'mobile_dev', avatarInitials: 'MD' },
+        rating: 4,
+        text: 'Хороший UX, но не хватает мобильной версии.',
+        createdAt: '2026-06-13T15:30:00Z',
+      },
+    ],
     comments: [
       {
         id: 'c1',
@@ -34,6 +56,21 @@ export const MOCK_PROJECTS: Project[] = [
     tags: ['экология', 'геймификация', 'iOS'],
     createdAt: '2026-06-12T14:30:00Z',
     testingSlots: 15,
+    url: 'https://ecotrack.app',
+    idea: 'Люди не осознают свой углеродный след, потому что он невидим. EcoTrack делает его измеримым и превращает сокращение в игру с достижениями и лигами.',
+    attachments: [
+      { id: 'a3', name: 'EcoTrack_Prototype.pdf', url: '#', type: 'pdf' },
+      { id: 'a4', name: 'EcoTrack_Source.zip', url: '#', type: 'zip' },
+    ],
+    reviews: [
+      {
+        id: 'r3',
+        author: { id: 'u4', username: 'eco_tester', avatarInitials: 'ET' },
+        rating: 5,
+        text: 'Геймификация реально мотивирует! Сократил потребление на 20% за неделю.',
+        createdAt: '2026-06-14T09:00:00Z',
+      },
+    ],
     comments: [
       {
         id: 'c2',
@@ -61,6 +98,12 @@ export const MOCK_PROJECTS: Project[] = [
     tags: ['образование', 'языки', 'Chrome'],
     createdAt: '2026-06-13T11:00:00Z',
     testingSlots: 5,
+    url: 'https://chrome.google.com/lexify',
+    idea: 'Изучение языков эффективно в контексте. Lexify встраивается в привычный браузинг — не нужно переключаться в отдельное приложение.',
+    attachments: [
+      { id: 'a5', name: 'Lexify_Design.fig', url: '#', type: 'figma' },
+    ],
+    reviews: [],
     comments: [],
   },
   {
@@ -75,6 +118,20 @@ export const MOCK_PROJECTS: Project[] = [
     tags: ['дизайн', 'AI', 'инструменты'],
     createdAt: '2026-06-14T09:00:00Z',
     testingSlots: 20,
+    url: 'https://moodboard.ai',
+    idea: 'Дизайнеры тратят часы на сбор референсов. MoodBoard AI генерирует полный мудборд за минуты по текстовому описанию концепции.',
+    attachments: [
+      { id: 'a6', name: 'MoodBoard_Presentation.pdf', url: '#', type: 'pdf' },
+    ],
+    reviews: [
+      {
+        id: 'r4',
+        author: { id: 'u8', username: 'ux_pro', avatarInitials: 'UP' },
+        rating: 4,
+        text: 'Качество генерации на удивление высокое. Иногда промахивается с цветовой палитрой.',
+        createdAt: '2026-06-15T14:00:00Z',
+      },
+    ],
     comments: [
       {
         id: 'c4',
@@ -96,6 +153,10 @@ export const MOCK_PROJECTS: Project[] = [
     tags: ['финансы', 'OCR', 'Android'],
     createdAt: '2026-06-15T16:00:00Z',
     testingSlots: 12,
+    url: undefined,
+    idea: undefined,
+    attachments: [],
+    reviews: [],
     comments: [],
   },
   {
@@ -110,6 +171,10 @@ export const MOCK_PROJECTS: Project[] = [
     tags: ['Telegram', 'автоматизация', 'команды'],
     createdAt: '2026-06-16T08:00:00Z',
     testingSlots: 3,
+    url: undefined,
+    idea: undefined,
+    attachments: [],
+    reviews: [],
     comments: [
       {
         id: 'c5',
@@ -131,6 +196,10 @@ export const MOCK_PROJECTS: Project[] = [
     tags: ['привычки', 'AI', 'мотивация'],
     createdAt: '2026-06-17T07:00:00Z',
     testingSlots: 10,
+    url: undefined,
+    idea: undefined,
+    attachments: [],
+    reviews: [],
     comments: [],
   },
   {
@@ -145,6 +214,10 @@ export const MOCK_PROJECTS: Project[] = [
     tags: ['еда', 'сообщество', 'маркетплейс'],
     createdAt: '2026-06-17T12:00:00Z',
     testingSlots: 25,
+    url: undefined,
+    idea: undefined,
+    attachments: [],
+    reviews: [],
     comments: [
       {
         id: 'c6',
@@ -166,6 +239,10 @@ export const MOCK_PROJECTS: Project[] = [
     tags: ['GitHub', 'AI', 'code review'],
     createdAt: '2026-06-18T09:00:00Z',
     testingSlots: 7,
+    url: undefined,
+    idea: undefined,
+    attachments: [],
+    reviews: [],
     comments: [
       {
         id: 'c7',
@@ -187,6 +264,10 @@ export const MOCK_PROJECTS: Project[] = [
     tags: ['здоровье', 'продуктивность', 'macOS'],
     createdAt: '2026-06-18T14:00:00Z',
     testingSlots: 18,
+    url: undefined,
+    idea: undefined,
+    attachments: [],
+    reviews: [],
     comments: [],
   },
   {
@@ -201,6 +282,10 @@ export const MOCK_PROJECTS: Project[] = [
     tags: ['стартап', 'AI', 'презентации'],
     createdAt: '2026-06-19T10:00:00Z',
     testingSlots: 6,
+    url: undefined,
+    idea: undefined,
+    attachments: [],
+    reviews: [],
     comments: [
       {
         id: 'c8',
@@ -222,6 +307,34 @@ export const MOCK_PROJECTS: Project[] = [
     tags: ['сообщество', 'соседи', 'помощь'],
     createdAt: '2026-06-19T16:00:00Z',
     testingSlots: 30,
+    url: undefined,
+    idea: undefined,
+    attachments: [],
+    reviews: [],
+    comments: [],
+  },
+  {
+    id: '13',
+    title: 'DevMetrics — аналитика продуктивности команды',
+    description:
+      'Дашборд для тимлидов: собирает метрики из GitHub, Jira и Slack, показывает узкие места и прогнозирует дедлайны.',
+    category: 'Инструмент разработчика',
+    author: {
+      id: 'current-user',
+      username: 'test_user_42',
+      avatarInitials: 'ВЫ',
+    },
+    likesCount: 12,
+    isLiked: false,
+    tags: ['аналитика', 'команды', 'продуктивность'],
+    createdAt: '2026-06-20T09:00:00Z',
+    testingSlots: 10,
+    url: 'https://devmetrics.looqa.dev',
+    idea: 'Тимлиды тратят часы на сбор метрик из разных систем. DevMetrics агрегирует всё автоматически и даёт actionable insights.',
+    attachments: [
+      { id: 'a10', name: 'DevMetrics_Mockup.fig', url: '#', type: 'figma' },
+    ],
+    reviews: [],
     comments: [],
   },
 ];

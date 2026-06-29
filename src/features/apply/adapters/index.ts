@@ -11,7 +11,7 @@ async function mockApply(): Promise<ApplyResponse> {
 }
 
 export async function applyAdapter(req: ApplyRequest): Promise<ApplyResponse> {
-  if (getFlag(FLAGS.MOCK_APPLY, true)) return mockApply();
+  if (getFlag(FLAGS.MOCK_APPLY)) return mockApply();
   return apiService.post<ApplyResponse>({
     url: `/projects/${req.projectId}/apply/`,
     body: req,

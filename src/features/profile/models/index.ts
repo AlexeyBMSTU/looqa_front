@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import type {
   UserProfile,
   AppliedProject,
+  OwnerProject,
   UpdateProfileRequest,
 } from '../types';
 import {
@@ -14,6 +15,7 @@ import {
 class ProfileModel {
   profile: UserProfile | null = null;
   applications: AppliedProject[] = [];
+  projects: OwnerProject[] = [];
   isLoading = false;
   isSaving = false;
   saveSuccess = false;
@@ -34,11 +36,17 @@ class ProfileModel {
       runInAction(() => {
         this.profile = res.profile;
         this.applications = res.applications;
+        this.projects = res.projects ?? [];
         this.isLoading = false;
       });
     } catch (e) {
       runInAction(() => {
-        this.error = e instanceof Error ? e.message : 'Ошибка загрузки профиля';
+        // 401 — не техническая ошибка, просто нет данных профиля
+        const status = (e as Error & { status?: number }).status;
+        if (status !== 401 && status !== 404) {
+          this.error =
+            e instanceof Error ? e.message : 'Ошибка загрузки профиля';
+        }
         this.isLoading = false;
       });
     }

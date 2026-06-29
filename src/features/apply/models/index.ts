@@ -21,14 +21,18 @@ class ApplyModel {
     this.isLoading = true;
     this.error = null;
     try {
-      const res = await applyAdapter(req);
+      const response = await applyAdapter(req);
+      console.log(response);
+      console.log('ВСЕ ОК?');
       runInAction(() => {
-        this.isSuccess = res.success;
-        this.isLoading = false;
+        this.isSuccess = !response.error;
       });
     } catch {
       runInAction(() => {
         this.error = 'Не удалось отправить заявку. Попробуйте позже.';
+      });
+    } finally {
+      runInAction(() => {
         this.isLoading = false;
       });
     }

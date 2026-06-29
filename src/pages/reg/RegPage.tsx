@@ -8,25 +8,32 @@ import { regModel } from '@/features/reg/models';
 import { InputComponent } from '@/shared/components/Input/Input';
 import { PageComponent } from '@/shared/components/PageComponent/PageComponent';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Flex, Form, Progress } from 'antd';
+import { Button, Flex, Form, Progress, message } from 'antd';
 import Title from 'antd/es/typography/Title';
 import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { useCallback, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import styles from './RegPage.module.css';
 import { calculatePasswordStrength } from '@/features/reg/helpers';
 import { RequestAuthProps } from '@/features/reg/types';
 
 export const RegPage = observer(() => {
+  const navigate = useNavigate();
   const [passwordStrength, setPasswordStrength] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
+
   const onFinish = async (data: RequestAuthProps) => {
+    setLoading(true);
     try {
-      console.log(data);
       await regModel.requestAuth(data);
-    } catch (error) {
-      console.error('Ошибка регистрации:', error);
+      message.success('Аккаунт успешно создан!');
+      navigate('/feed/');
+    } catch {
+      message.error('Ошибка регистрации. Возможно, имя уже занято.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -128,6 +135,7 @@ export const RegPage = observer(() => {
                   block
                   type="primary"
                   htmlType="submit"
+                  loading={loading}
                 >
                   Зарегистрироваться
                 </Button>

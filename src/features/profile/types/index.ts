@@ -40,9 +40,21 @@ export interface UpdatePasswordRequest {
   newPassword: string;
 }
 
+export interface OwnerProject {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  tags: string[];
+  testingSlots: number;
+  likesCount: number;
+  createdAt: string;
+}
+
 export interface ProfileResponse {
   profile: UserProfile;
   applications: AppliedProject[];
+  projects: OwnerProject[];
 }
 
 export interface UpdateProfileResponse {

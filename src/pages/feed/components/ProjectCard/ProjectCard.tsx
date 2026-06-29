@@ -1,9 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router';
 import { observer } from 'mobx-react-lite';
-import { Button, Input } from 'antd';
+import { Button, Input, Spin } from 'antd';
 import { HeartOutlined, HeartFilled, MessageOutlined } from '@ant-design/icons';
 import { feedModel } from '@/features/feed/models';
+import { authStore } from '@/features/auth/store';
 import type { Project } from '@/features/feed/types';
 import { modalStore } from '@/shared/components/Modal/modalStore';
 import { ApplyModal } from '@/features/apply/components/ApplyModal/ApplyModal';
@@ -40,13 +42,17 @@ export const ProjectCard = observer(
     };
 
     const handleToggleComments = () => {
-      setCommentsOpen(prev => !prev);
+      const opening = !commentsOpen;
+      setCommentsOpen(opening);
+      // При открытии — всегда подгружаем актуальные комментарии с сервера
+      if (opening) {
+        feedModel.loadComments(project.id);
+      }
     };
 
     const handleSubmitComment = async () => {
       const trimmed = commentText.trim();
       if (!trimmed || isSubmitting) return;
-
       setIsSubmitting(true);
       try {
         await feedModel.addComment(project.id, trimmed);
@@ -62,9 +68,12 @@ export const ProjectCard = observer(
       }
     };
 
+    const isLoadingComments = feedModel.loadingCommentsFor === project.id;
+    const comments = project.comments ?? [];
+
     return (
       <article className={styles.card}>
-        {/* Top row: author + category + date */}
+        {/* Top row */}
         <div className={styles.topRow}>
           {!hideAuthor && (
             <div className={styles.authorInfo}>
@@ -77,13 +86,14 @@ export const ProjectCard = observer(
               />
             </div>
           )}
-
           <span className={styles.categoryBadge}>{project.category}</span>
           <time className={styles.date}>{formatDate(project.createdAt)}</time>
         </div>
 
         {/* Title */}
-        <h2 className={styles.title}>{project.title}</h2>
+        <Link to={`/projects/${project.id}`} className={styles.titleLink}>
+          <h2 className={styles.title}>{project.title}</h2>
+        </Link>
 
         {/* Description */}
         <p className={styles.description}>{project.description}</p>
@@ -108,7 +118,7 @@ export const ProjectCard = observer(
           </div>
         )}
 
-        {/* Action row */}
+        {/* Actions */}
         <div className={styles.actions}>
           <button
             className={`${styles.actionBtn} ${project.isLiked ? styles.actionBtnLiked : ''}`}
@@ -129,28 +139,40 @@ export const ProjectCard = observer(
             aria-label="Комментарии"
           >
             <MessageOutlined />
-            <span className={styles.actionCount}>
-              {project.comments.length}
-            </span>
+            <span className={styles.actionCount}>{comments.length}</span>
           </button>
 
           <div className={styles.actionsSpacer} />
 
-          <Button
-            size="small"
-            className={styles.applyButton}
-            onClick={handleApply}
-          >
-            Записаться на тестирование
-          </Button>
+          {/* Кнопка записи — только для тестировщиков */}
+          {authStore.isQA && (
+            <Button
+              size="small"
+              className={styles.applyButton}
+              onClick={handleApply}
+            >
+              Записаться на тестирование
+            </Button>
+          )}
+          {!authStore.isAuthenticated && (
+            <Link to="/login/">
+              <Button size="small" className={styles.applyButton}>
+                Войти чтобы записаться
+              </Button>
+            </Link>
+          )}
         </div>
 
         {/* Comments section */}
         {commentsOpen && (
           <div className={styles.comments}>
-            {project.comments.length > 0 && (
+            {isLoadingComments ? (
+              <div className={styles.commentsLoader}>
+                <Spin size="small" />
+              </div>
+            ) : comments.length > 0 ? (
               <ul className={styles.commentList}>
-                {project.comments.map(comment => (
+                {comments.map(comment => (
                   <li key={comment.id} className={styles.commentItem}>
                     <div className={styles.commentAvatar}>
                       {comment.author.avatarInitials}
@@ -170,25 +192,35 @@ export const ProjectCard = observer(
                   </li>
                 ))}
               </ul>
+            ) : (
+              <p className={styles.noComments}>Комментариев пока нет</p>
             )}
 
             <div className={styles.commentInputRow}>
-              <Input
-                placeholder="Написать комментарий..."
-                value={commentText}
-                onChange={e => setCommentText(e.target.value)}
-                onKeyDown={handleCommentKeyDown}
-                className={styles.commentInput}
-                disabled={isSubmitting}
-              />
-              <Button
-                onClick={handleSubmitComment}
-                loading={isSubmitting}
-                disabled={!commentText.trim()}
-                className={styles.sendButton}
-              >
-                Отправить
-              </Button>
+              {authStore.isAuthenticated ? (
+                <>
+                  <Input
+                    placeholder="Написать комментарий..."
+                    value={commentText}
+                    onChange={e => setCommentText(e.target.value)}
+                    onKeyDown={handleCommentKeyDown}
+                    className={styles.commentInput}
+                    disabled={isSubmitting || isLoadingComments}
+                  />
+                  <Button
+                    onClick={handleSubmitComment}
+                    loading={isSubmitting}
+                    disabled={!commentText.trim() || isLoadingComments}
+                    className={styles.sendButton}
+                  >
+                    Отправить
+                  </Button>
+                </>
+              ) : (
+                <Link to="/login/" className={styles.loginToComment}>
+                  Войдите чтобы оставить комментарий
+                </Link>
+              )}
             </div>
           </div>
         )}
