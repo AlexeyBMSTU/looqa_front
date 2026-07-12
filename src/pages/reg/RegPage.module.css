@@ -1,0 +1,68 @@
+.component {
+  min-height: calc(100vh - var(--navbar-padding));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.root {
+  background: var(--color-beige);
+  padding: 2.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(60, 36, 28, 0.15);
+  box-shadow: 0 20px 60px rgba(60, 36, 28, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 460px;
+  max-width: 100%;
+}
+
+.form {
+  width: 100%;
+}
+
+.passwordStrength {
+  margin-top: 8px;
+  height: 6px;
+  background: transparent;
+}
+
+.passwordRules {
+  margin-top: 8px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 20px;
+}
+
+.red :global(.ant-form-item-explain-error),
+.red :global(.ant-input-prefix),
+.red :global(.ant-input-affix-wrapper) {
+  color: #ff4d4f !important;
+  border-color: #ff4d4f !important;
+}
+
+.warning :global(.ant-form-item-explain-error),
+.warning :global(.ant-input-prefix),
+.warning :global(.ant-input-affix-wrapper) {
+  color: #faad14 !important;
+  border-color: #faad14 !important;
+}
+
+.good :global(.ant-form-item-explain-error),
+.good :global(.ant-input-prefix),
+.good :global(.ant-input-affix-wrapper) {
+  color: #f7c052 !important;
+  border-color: #f7c052 !important;
+}
+
+.colorTextWithUnmount :global(.ant-form-item-explain-error) {
+  color: #f7c052 !important;
+}
+
+.submitButton {
+  margin-top: 20px;
+}

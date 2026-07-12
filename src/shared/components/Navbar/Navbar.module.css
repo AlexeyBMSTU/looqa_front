@@ -1,0 +1,213 @@
+/* ── Navbar ───────────────────────────────────────────────── */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: var(--navbar-padding);
+  background-color: var(--color-beige);
+  border-bottom: 1px solid rgba(60, 36, 28, 0.12);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 2rem;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  gap: 2rem;
+}
+
+/* ── Logo ─────────────────────────────────────────────────── */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logoIcon {
+  width: 32px;
+  height: 32px;
+  background: var(--color-brown);
+  color: var(--color-beige);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-brown);
+}
+
+/* ── Nav links ────────────────────────────────────────────── */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navLink {
+  color: rgba(60, 36, 28, 0.7);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.navLink:hover {
+  color: var(--color-brown);
+}
+
+.navLinkActive {
+  color: var(--color-brown);
+  font-weight: 600;
+}
+
+/* ── Actions (search + login) ─────────────────────────────── */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* Override Ant Design button to match brand ──────────────── */
+.loginBtn.loginBtn {
+  background: var(--color-brown) !important;
+  color: var(--color-beige) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 0 1.25rem !important;
+  height: 2.25rem !important;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  transition:
+    background 0.2s,
+    opacity 0.2s;
+}
+
+.loginBtn.loginBtn:hover {
+  background: color-mix(
+    in srgb,
+    var(--color-brown) 85%,
+    var(--color-blue)
+  ) !important;
+  opacity: 0.92;
+}
+
+.createBtn.createBtn {
+  background-color: var(--color-brown) !important;
+  color: var(--color-beige) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  padding: 0 1.25rem !important;
+  height: 2.25rem !important;
+  font-size: 0.9375rem;
+  transition: opacity 0.2s;
+}
+
+.createBtn.createBtn:hover {
+  opacity: 0.88;
+}
+
+/* Кнопка Регистрация */
+.registerBtn.registerBtn {
+  background: transparent !important;
+  color: var(--color-brown) !important;
+  border: 1px solid rgba(60, 36, 28, 0.35) !important;
+  border-radius: 8px !important;
+  padding: 0 1.25rem !important;
+  height: 2.25rem !important;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.registerBtn.registerBtn:hover {
+  background: rgba(60, 36, 28, 0.06) !important;
+}
+
+/* Кнопка Выйти */
+.logoutBtn.logoutBtn {
+  background: transparent !important;
+  color: rgba(60, 36, 28, 0.6) !important;
+  border: 1px solid rgba(60, 36, 28, 0.2) !important;
+  border-radius: 8px !important;
+  padding: 0 1rem !important;
+  height: 2.25rem !important;
+  transition: all 0.2s;
+}
+
+.logoutBtn.logoutBtn:hover {
+  color: var(--color-brown) !important;
+  border-color: rgba(60, 36, 28, 0.4) !important;
+}
+
+/* Аватарка + имя пользователя */
+.userBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  padding: 0.25rem 0.625rem;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.userBtn:hover {
+  background: rgba(60, 36, 28, 0.07);
+}
+
+.userAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-brown);
+  color: var(--color-beige);
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+
+.userName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-brown);
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .navLinks {
+    display: none;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+}

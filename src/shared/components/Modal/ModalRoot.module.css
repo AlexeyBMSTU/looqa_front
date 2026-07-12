@@ -1,0 +1,20 @@
+:global(.ant-modal-content) {
+  background: var(--color-beige) !important;
+  border-radius: 16px !important;
+  padding: 0 !important;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(60, 36, 28, 0.15) !important;
+  outline: none !important;
+}
+
+:global(.ant-modal-close) {
+  color: var(--color-brown) !important;
+  opacity: 0.5;
+  top: 16px;
+  right: 16px;
+}
+
+:global(.ant-modal-close:hover) {
+  opacity: 1;
+  background: transparent !important;
+}

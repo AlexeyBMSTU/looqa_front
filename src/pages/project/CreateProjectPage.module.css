@@ -1,0 +1,218 @@
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* ── Form card ── */
+.card {
+  background: var(--color-beige);
+  border: 1px solid rgba(60, 36, 28, 0.12);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.heading {
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: var(--color-brown);
+  margin: 0 0 1.75rem;
+  line-height: 1.2;
+}
+
+/* ── Submit button ── */
+.submitBtn.submitBtn {
+  background: var(--color-brown) !important;
+  color: var(--color-beige) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  height: 44px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  margin-top: 0.5rem;
+}
+
+.submitBtn.submitBtn:hover {
+  opacity: 0.88;
+}
+
+/* ── Ant Design form overrides ── */
+:global(.ant-form-item-label > label) {
+  color: var(--color-brown) !important;
+  font-weight: 600;
+}
+
+/* ── Success screen ── */
+.successCard {
+  background: var(--color-beige);
+  border: 1px solid rgba(60, 36, 28, 0.12);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.successIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--color-brown);
+  color: var(--color-beige);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.successTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-brown);
+  margin: 0;
+}
+
+.successText {
+  font-size: 0.9375rem;
+  color: rgba(60, 36, 28, 0.65);
+  margin: 0;
+  max-width: 360px;
+}
+
+.successActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.viewBtn.viewBtn {
+  background: var(--color-brown) !important;
+  color: var(--color-beige) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  height: 40px !important;
+  font-weight: 600 !important;
+  padding: 0 1.5rem !important;
+}
+
+.viewBtn.viewBtn:hover {
+  opacity: 0.88;
+}
+
+.resetBtn.resetBtn {
+  background: transparent !important;
+  color: var(--color-brown) !important;
+  border: 1px solid rgba(60, 36, 28, 0.35) !important;
+  border-radius: 8px !important;
+  height: 40px !important;
+  font-weight: 600 !important;
+  padding: 0 1.5rem !important;
+}
+
+.resetBtn.resetBtn:hover {
+  border-color: var(--color-brown) !important;
+  background: rgba(60, 36, 28, 0.04) !important;
+}
+
+/* ── File upload ────────────────────────────────────── */
+.uploadArea {
+  border: 2px dashed rgba(60, 36, 28, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+.uploadArea:hover {
+  border-color: rgba(60, 36, 28, 0.45);
+}
+
+.uploadLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  cursor: pointer;
+  gap: 0.25rem;
+}
+.fileInput {
+  display: none;
+}
+.uploadIcon {
+  font-size: 1.5rem;
+}
+.uploadText {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-brown);
+}
+.uploadHint {
+  font-size: 0.75rem;
+  color: rgba(60, 36, 28, 0.45);
+}
+
+.fileList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid rgba(60, 36, 28, 0.1);
+}
+.fileItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: var(--font-size-sm);
+  border-bottom: 1px solid rgba(60, 36, 28, 0.06);
+}
+.fileName {
+  flex: 1;
+  color: var(--color-brown);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fileStatus {
+  color: rgba(60, 36, 28, 0.45);
+  font-size: 0.8rem;
+}
+.fileStatusOk {
+  color: #15803d;
+  font-size: 0.8rem;
+}
+.fileStatusErr {
+  color: #dc2626;
+  font-size: 0.8rem;
+}
+.fileRemove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(60, 36, 28, 0.35);
+  font-size: 1.1rem;
+  padding: 0 0.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.fileRemove:hover {
+  color: var(--color-brown);
+}
+
+/* ── Responsive ── */
+@media (max-width: 767px) {
+  .page {
+    padding: 1.25rem 1rem;
+  }
+
+  .card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .heading {
+    font-size: 1.375rem;
+  }
+}

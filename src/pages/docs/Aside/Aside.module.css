@@ -1,0 +1,5 @@
+.aside {
+  position: fixed;
+  left: 0;
+  width: var(--aside-padding);
+}

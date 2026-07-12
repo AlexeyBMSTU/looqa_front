@@ -1,0 +1,18 @@
+.root {
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--color-blue);
+}
+
+.svg {
+  scale: 3;
+}
+
+.text {
+  z-index: 1;
+}

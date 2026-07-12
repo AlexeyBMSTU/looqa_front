@@ -1,0 +1,269 @@
+.root {
+  max-width: 520px;
+}
+
+/* ── Section ──────────────────────────────────────────────── */
+.section {
+  padding: 0.25rem 0;
+}
+
+.sectionTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-brown);
+  margin: 0 0 1rem;
+  line-height: 1.3;
+}
+
+.subsection {
+  margin-bottom: 1rem;
+}
+
+.subsectionTitle {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-brown);
+  margin: 0 0 0.6rem;
+}
+
+/* ── Divider ──────────────────────────────────────────────── */
+.divider {
+  border: none;
+  border-top: 1px solid rgba(60, 36, 28, 0.1);
+  margin: 1.25rem 0;
+}
+
+/* ── Form ─────────────────────────────────────────────────── */
+.form {
+  width: 100%;
+}
+
+/* Submit button */
+.submitBtn.submitBtn {
+  background: var(--color-brown) !important;
+  color: var(--color-beige) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  width: auto;
+  font-weight: 500;
+}
+
+.submitBtn.submitBtn:hover {
+  background: color-mix(
+    in srgb,
+    var(--color-brown) 85%,
+    var(--color-blue)
+  ) !important;
+  opacity: 0.92;
+}
+
+.submitBtn.submitBtn:disabled {
+  opacity: 0.55 !important;
+}
+
+/* ── Avatar color picker row ─────────────────────────────────────── */
+.avatarSection {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.avatarPreviewLarge {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-brown);
+  color: var(--color-beige);
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.avatarControls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding-top: 0.25rem;
+}
+
+.avatarUploadBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.875rem;
+  border: 1px solid rgba(60, 36, 28, 0.25);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  color: var(--color-brown);
+  font-family: inherit;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.avatarUploadBtn:hover {
+  background: rgba(60, 36, 28, 0.06);
+}
+.avatarUploadBtnDisabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fileInput {
+  display: none;
+}
+
+.colorPickerRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.colorLabel {
+  font-size: var(--font-size-xs);
+  color: rgba(60, 36, 28, 0.55);
+}
+
+.removeAvatarBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: var(--font-size-xs);
+  color: rgba(60, 36, 28, 0.45);
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: underline;
+}
+.removeAvatarBtn:hover {
+  color: var(--color-brown);
+}
+
+/* legacy color row (kept for colorPicker/avatarPreview) */
+.colorRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.colorPicker {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(60, 36, 28, 0.2);
+  border-radius: 8px;
+  padding: 2px;
+  cursor: pointer;
+  background: none;
+  flex-shrink: 0;
+}
+
+.avatarPreview {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: var(--color-beige);
+  font-size: 0.875rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.15s;
+}
+
+/* ── Email block ──────────────────────────────────────────── */
+.emailRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.emailValue {
+  font-size: var(--font-size-sm);
+  color: var(--color-brown);
+  font-weight: 500;
+}
+
+.emailVerifiedBadge {
+  background: rgba(60, 36, 28, 0.08);
+  color: var(--color-brown);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+}
+
+.emailBindRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.noEmail {
+  font-size: var(--font-size-sm);
+  color: rgba(60, 36, 28, 0.5);
+  margin: 0;
+}
+
+.emailInputRow {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.emailInput {
+  flex: 1;
+}
+
+/* ── Error text ───────────────────────────────────────────── */
+.errorText {
+  color: #c0392b;
+  font-size: var(--font-size-sm);
+  margin: 0 0 0.75rem;
+}
+
+/* ── Email bound state ────────────────────────────────────── */
+.emailBound {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.emailActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.emailPendingBadge {
+  font-size: 0.75rem;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 0.1rem 0.5rem;
+  border-radius: 50px;
+}
+
+.emailSent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(183, 206, 228, 0.2);
+  border-radius: 8px;
+}
+
+.emailHint {
+  font-size: var(--font-size-xs);
+  color: rgba(60, 36, 28, 0.55);
+  margin: 0;
+}
+
+.removeEmailBtn.removeEmailBtn {
+  border-color: rgba(60, 36, 28, 0.3) !important;
+  color: rgba(60, 36, 28, 0.6) !important;
+}
