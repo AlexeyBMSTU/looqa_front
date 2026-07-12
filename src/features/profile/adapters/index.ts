@@ -5,7 +5,6 @@ import type {
   ProfileResponse,
   UpdateProfileRequest,
   UpdateProfileResponse,
-  UpdateEmailRequest,
   UpdatePasswordRequest,
 } from '../types';
 
@@ -38,9 +37,14 @@ async function mockUpdateProfile(
   return { profile: { ...mockProfile } };
 }
 
-async function mockUpdateEmail(): Promise<{ success: boolean }> {
+async function mockSendEmailVerification(): Promise<{ message: string }> {
+  await delay(600);
+  return { message: 'verification email sent' };
+}
+
+async function mockRemoveEmail(): Promise<{ message: string }> {
   await delay(400);
-  return { success: true };
+  return { message: 'email removed' };
 }
 
 async function mockUpdatePassword(
@@ -70,13 +74,35 @@ export async function updateProfileAdapter(
   });
 }
 
-export async function updateEmailAdapter(
-  req: UpdateEmailRequest
-): Promise<{ success: boolean }> {
-  if (getFlag(FLAGS.MOCK_PROFILE)) return mockUpdateEmail();
-  return apiService.post<{ success: boolean }>({
-    url: '/profile/email/',
-    body: req,
+export async function sendEmailVerificationAdapter(
+  email: string
+): Promise<{ message: string }> {
+  if (getFlag(FLAGS.MOCK_PROFILE)) return mockSendEmailVerification();
+  return apiService.post({ url: '/profile/email/verify/', body: { email } });
+}
+
+export async function removeEmailAdapter(): Promise<{ message: string }> {
+  if (getFlag(FLAGS.MOCK_PROFILE)) return mockRemoveEmail();
+  return apiService.delete({ url: '/profile/email/' });
+}
+
+export async function forgotPasswordAdapter(
+  email: string
+): Promise<{ message: string }> {
+  if (getFlag(FLAGS.MOCK_PROFILE)) {
+    await new Promise(r => setTimeout(r, 800));
+    return { message: 'if email exists, reset link was sent' };
+  }
+  return apiService.post({ url: '/auth/forgot-password/', body: { email } });
+}
+
+export async function resetPasswordAdapter(
+  token: string,
+  newPassword: string
+): Promise<{ message: string }> {
+  return apiService.post({
+    url: '/auth/reset-password/',
+    body: { token, newPassword },
   });
 }
 

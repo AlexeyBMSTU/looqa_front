@@ -8,8 +8,14 @@ import { StyleProvider } from '@ant-design/cssinjs';
 import { ModalRoot } from './shared/components/Modal';
 import { ConfigProvider } from 'antd';
 import ruRU from 'antd/locale/ru_RU';
+import { useEffect } from 'react';
+import { profileModel } from './features/profile/models';
 
 function App() {
+  useEffect(() => {
+    profileModel.loadProfile();
+  }, []);
+
   return (
     <StyleProvider layer>
       <ConfigProvider

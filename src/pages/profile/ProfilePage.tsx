@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Skeleton, Tabs, Button } from 'antd';
+import { useSearchParams } from 'react-router';
+import { Skeleton, Tabs, Button, message } from 'antd';
 import { profileModel } from '@/features/profile/models';
 import { authStore } from '@/features/auth/store';
+import { useEmailVerificationWS } from '@/shared/hooks/useEmailVerificationWS';
 import { ApplicationsTab } from './tabs/ApplicationsTab/ApplicationsTab';
 import { ProjectsTab } from './tabs/ProjectsTab/ProjectsTab';
 import { SettingsTab } from './tabs/SettingsTab/SettingsTab';
 import styles from './ProfilePage.module.css';
+import { GENERAL_PORT } from '@/env';
 
 const ROLE_LABELS: Record<string, string> = {
   qa: 'Тестировщик',
@@ -16,6 +19,10 @@ const ROLE_LABELS: Record<string, string> = {
 export const ProfilePage = observer(() => {
   const { profile, applications, projects, isLoading, error } = profileModel;
   const { isOwner } = authStore;
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // WebSocket — слушаем подтверждение email в реальном времени
+  useEmailVerificationWS();
 
   // Default tab is role-aware
   const defaultTab = isOwner ? 'projects' : 'applications';
@@ -24,6 +31,23 @@ export const ProfilePage = observer(() => {
   useEffect(() => {
     profileModel.loadProfile();
   }, []);
+
+  useEffect(() => {
+    if (searchParams.get('emailVerified') === 'true') {
+      message.success('Email успешно подтверждён!');
+      setSearchParams({});
+      profileModel.loadProfile();
+    }
+    if (searchParams.get('emailRemoved') === 'true') {
+      message.success('Email успешно отвязан');
+      setSearchParams({});
+      profileModel.loadProfile();
+    }
+    if (searchParams.get('emailError')) {
+      message.error('Ссылка недействительна или истекла');
+      setSearchParams({});
+    }
+  }, [searchParams, setSearchParams]);
 
   // Как только загрузка завершилась без данных — переключаем на настройки
   useEffect(() => {
@@ -98,9 +122,16 @@ export const ProfilePage = observer(() => {
       <>
         <div
           className={styles.avatar}
-          style={{ backgroundColor: profile.avatarColor }}
+          style={{
+            backgroundColor: profile.avatarColor,
+            backgroundImage: profile.avatarUrl
+              ? `url(${GENERAL_PORT}${profile.avatarUrl})`
+              : undefined,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
         >
-          {profile.avatarInitials}
+          {!profile.avatarUrl && profile.avatarInitials}
         </div>
 
         <h2 className={styles.displayName}>{profile.displayName}</h2>

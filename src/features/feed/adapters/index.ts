@@ -58,7 +58,12 @@ async function mockAddComment(
   if (!project) throw new Error(`Project ${req.projectId} not found`);
   const comment: Comment = {
     id: `c-${Date.now()}`,
-    author: { id: 'current-user', username: 'Вы', avatarInitials: 'ВЫ' },
+    author: {
+      id: 'current-user',
+      username: 'Вы',
+      avatarInitials: 'ВЫ',
+      avatarColor: '#3C241C',
+    },
     text: req.text,
     createdAt: new Date().toISOString(),
   };

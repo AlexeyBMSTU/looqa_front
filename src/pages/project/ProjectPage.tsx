@@ -7,6 +7,8 @@ import { authStore } from '@/features/auth/store';
 import { UserLink } from '@/shared/components/UserLink/UserLink';
 import { ApplicationsQueue } from './components/ApplicationsQueue/ApplicationsQueue';
 import styles from './ProjectPage.module.css';
+import { GENERAL_PORT } from '@/env';
+import { Avatar } from '@/shared/components/Avatar/Avatar';
 
 const ATTACHMENT_ICONS: Record<string, string> = {
   figma: '🎨',
@@ -93,10 +95,7 @@ export const ProjectPage = observer(() => {
       : null;
 
   // ── Review gating ──────────────────────────────────────────────────────────
-  const isAccepted = projectDetailModel.applications.some(
-    a => a.applicant.id === authStore.userID && a.status === 'accepted'
-  );
-  const canReview = authStore.isQA && isAccepted && !projectDetailModel.isOwner;
+  const canReview = authStore.isQA && projectDetailModel.isAcceptedTester;
 
   return (
     <div className={styles.page}>
@@ -168,7 +167,11 @@ export const ProjectPage = observer(() => {
                     {ATTACHMENT_ICONS[att.type] ?? '📎'}
                   </span>
                   <span className={styles.attachmentName}>{att.name}</span>
-                  <a href={att.url} download className={styles.downloadBtn}>
+                  <a
+                    href={`${GENERAL_PORT}${att.url}`}
+                    download
+                    className={styles.downloadBtn}
+                  >
                     Скачать
                   </a>
                 </li>
@@ -192,9 +195,13 @@ export const ProjectPage = observer(() => {
           <ul className={styles.reviewList}>
             {project.reviews.map(review => (
               <li key={review.id} className={styles.reviewItem}>
-                <div className={styles.reviewAvatar}>
-                  {review.author.avatarInitials}
-                </div>
+                <Avatar
+                  initials={review.author.avatarInitials}
+                  color={review.author.avatarColor}
+                  avatarUrl={review.author.avatarUrl}
+                  size="sm"
+                  className={styles.reviewAvatar}
+                />
                 <div className={styles.reviewBody}>
                   <div className={styles.reviewMeta}>
                     <UserLink username={review.author.username} />

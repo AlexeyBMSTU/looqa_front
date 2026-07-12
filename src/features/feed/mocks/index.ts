@@ -7,9 +7,15 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       'Простой и быстрый инструмент для управления задачами и проектами. Без лишнего — только то, что нужно фрилансеру для работы с несколькими клиентами одновременно.',
     category: 'Веб-сервис',
-    author: { id: 'u1', username: 'Pavel_dev', avatarInitials: 'PD' },
+    author: {
+      id: 'u1',
+      username: 'Pavel_dev',
+      avatarInitials: 'PD',
+      avatarColor: '#3C241C',
+    },
     likesCount: 24,
     isLiked: false,
+    commentsCount: 1,
     tags: ['продуктивность', 'фриланс', 'задачи'],
     createdAt: '2026-06-10T10:00:00Z',
     testingSlots: 8,
@@ -22,14 +28,24 @@ export const MOCK_PROJECTS: Project[] = [
     reviews: [
       {
         id: 'r1',
-        author: { id: 'u2', username: 'Maria_qa', avatarInitials: 'MQ' },
+        author: {
+          id: 'u2',
+          username: 'Maria_qa',
+          avatarInitials: 'MQ',
+          avatarColor: '#3C241C',
+        },
         rating: 5,
         text: 'Очень удобно! Особенно понравилась быстрая смена клиента без потери контекста.',
         createdAt: '2026-06-12T10:00:00Z',
       },
       {
         id: 'r2',
-        author: { id: 'u5', username: 'mobile_dev', avatarInitials: 'MD' },
+        author: {
+          id: 'u5',
+          username: 'mobile_dev',
+          avatarInitials: 'MD',
+          avatarColor: '#3C241C',
+        },
         rating: 4,
         text: 'Хороший UX, но не хватает мобильной версии.',
         createdAt: '2026-06-13T15:30:00Z',
@@ -38,7 +54,12 @@ export const MOCK_PROJECTS: Project[] = [
     comments: [
       {
         id: 'c1',
-        author: { id: 'u2', username: 'Maria_qa', avatarInitials: 'MQ' },
+        author: {
+          id: 'u2',
+          username: 'Maria_qa',
+          avatarInitials: 'MQ',
+          avatarColor: '#3C241C',
+        },
         text: 'Отличная идея! Давно ищу что-то подобное для работы с клиентами.',
         createdAt: '2026-06-11T09:15:00Z',
       },
@@ -50,9 +71,15 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       'Мобильное приложение для отслеживания личного углеродного следа: транспорт, еда, покупки. Геймификация мотивирует к осознанному потреблению.',
     category: 'Мобильное приложение',
-    author: { id: 'u3', username: 'green_anna', avatarInitials: 'GA' },
+    author: {
+      id: 'u3',
+      username: 'green_anna',
+      avatarInitials: 'GA',
+      avatarColor: '#4A7C59',
+    },
     likesCount: 41,
     isLiked: true,
+    commentsCount: 2,
     tags: ['экология', 'геймификация', 'iOS'],
     createdAt: '2026-06-12T14:30:00Z',
     testingSlots: 15,
@@ -65,7 +92,12 @@ export const MOCK_PROJECTS: Project[] = [
     reviews: [
       {
         id: 'r3',
-        author: { id: 'u4', username: 'eco_tester', avatarInitials: 'ET' },
+        author: {
+          id: 'u4',
+          username: 'eco_tester',
+          avatarInitials: 'ET',
+          avatarColor: '#3C241C',
+        },
         rating: 5,
         text: 'Геймификация реально мотивирует! Сократил потребление на 20% за неделю.',
         createdAt: '2026-06-14T09:00:00Z',
@@ -74,13 +106,23 @@ export const MOCK_PROJECTS: Project[] = [
     comments: [
       {
         id: 'c2',
-        author: { id: 'u4', username: 'eco_tester', avatarInitials: 'ET' },
+        author: {
+          id: 'u4',
+          username: 'eco_tester',
+          avatarInitials: 'ET',
+          avatarColor: '#3C241C',
+        },
         text: 'Интересная концепция. Хочу попробовать!',
         createdAt: '2026-06-12T16:00:00Z',
       },
       {
         id: 'c3',
-        author: { id: 'u5', username: 'mobile_dev', avatarInitials: 'MD' },
+        author: {
+          id: 'u5',
+          username: 'mobile_dev',
+          avatarInitials: 'MD',
+          avatarColor: '#3C241C',
+        },
         text: 'Геймификация — это то, что отличит вас от конкурентов.',
         createdAt: '2026-06-13T08:45:00Z',
       },
@@ -92,9 +134,15 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       'Браузерное расширение для изучения иностранных слов прямо во время чтения статей. Выделяете слово — получаете перевод и добавляете в свою колоду.',
     category: 'Браузерное расширение',
-    author: { id: 'u6', username: 'lang_master', avatarInitials: 'LM' },
+    author: {
+      id: 'u6',
+      username: 'lang_master',
+      avatarInitials: 'LM',
+      avatarColor: '#6B4F9E',
+    },
     likesCount: 17,
     isLiked: false,
+    commentsCount: 0,
     tags: ['образование', 'языки', 'Chrome'],
     createdAt: '2026-06-13T11:00:00Z',
     testingSlots: 5,
@@ -112,9 +160,15 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       'Сервис для дизайнеров: опишите идею — ИИ собирает мудборд из подходящих изображений, шрифтов и цветовых палитр.',
     category: 'Веб-сервис',
-    author: { id: 'u7', username: 'design_kate', avatarInitials: 'DK' },
+    author: {
+      id: 'u7',
+      username: 'design_kate',
+      avatarInitials: 'DK',
+      avatarColor: '#C75B7A',
+    },
     likesCount: 63,
     isLiked: false,
+    commentsCount: 1,
     tags: ['дизайн', 'AI', 'инструменты'],
     createdAt: '2026-06-14T09:00:00Z',
     testingSlots: 20,
@@ -126,7 +180,12 @@ export const MOCK_PROJECTS: Project[] = [
     reviews: [
       {
         id: 'r4',
-        author: { id: 'u8', username: 'ux_pro', avatarInitials: 'UP' },
+        author: {
+          id: 'u8',
+          username: 'ux_pro',
+          avatarInitials: 'UP',
+          avatarColor: '#3C241C',
+        },
         rating: 4,
         text: 'Качество генерации на удивление высокое. Иногда промахивается с цветовой палитрой.',
         createdAt: '2026-06-15T14:00:00Z',
@@ -135,7 +194,12 @@ export const MOCK_PROJECTS: Project[] = [
     comments: [
       {
         id: 'c4',
-        author: { id: 'u8', username: 'ux_pro', avatarInitials: 'UP' },
+        author: {
+          id: 'u8',
+          username: 'ux_pro',
+          avatarInitials: 'UP',
+          avatarColor: '#3C241C',
+        },
         text: 'Это именно то, чего не хватало в нашем рабочем процессе.',
         createdAt: '2026-06-14T12:30:00Z',
       },
@@ -147,9 +211,15 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       'Сфотографируйте чек — приложение распознаёт позиции и распределяет, кто сколько должен заплатить. Для компаний и пар.',
     category: 'Мобильное приложение',
-    author: { id: 'u9', username: 'fin_startup', avatarInitials: 'FS' },
+    author: {
+      id: 'u9',
+      username: 'fin_startup',
+      avatarInitials: 'FS',
+      avatarColor: '#2E7D8C',
+    },
     likesCount: 38,
     isLiked: false,
+    commentsCount: 0,
     tags: ['финансы', 'OCR', 'Android'],
     createdAt: '2026-06-15T16:00:00Z',
     testingSlots: 12,
@@ -165,9 +235,15 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       'Телеграм-бот для команд разработки: собирает ежедневные апдейты, формирует сводку и публикует в общий чат. Экономит 15 минут каждое утро.',
     category: 'Телеграм-бот',
-    author: { id: 'u10', username: 'team_lead_igor', avatarInitials: 'TI' },
+    author: {
+      id: 'u10',
+      username: 'team_lead_igor',
+      avatarInitials: 'TI',
+      avatarColor: '#1A5276',
+    },
     likesCount: 29,
     isLiked: true,
+    commentsCount: 1,
     tags: ['Telegram', 'автоматизация', 'команды'],
     createdAt: '2026-06-16T08:00:00Z',
     testingSlots: 3,
@@ -178,7 +254,12 @@ export const MOCK_PROJECTS: Project[] = [
     comments: [
       {
         id: 'c5',
-        author: { id: 'u11', username: 'scrum_master', avatarInitials: 'SM' },
+        author: {
+          id: 'u11',
+          username: 'scrum_master',
+          avatarInitials: 'SM',
+          avatarColor: '#3C241C',
+        },
         text: 'Уже ждём когда можно будет протестировать!',
         createdAt: '2026-06-16T09:00:00Z',
       },
@@ -190,9 +271,15 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       'Формируйте привычки с умными напоминаниями и персональным ИИ-коучем. Анализирует прогресс и корректирует нагрузку, чтобы вы не перегорели.',
     category: 'Мобильное приложение',
-    author: { id: 'u12', username: 'habit_hacker', avatarInitials: 'HH' },
+    author: {
+      id: 'u12',
+      username: 'habit_hacker',
+      avatarInitials: 'HH',
+      avatarColor: '#7D3C98',
+    },
     likesCount: 55,
     isLiked: false,
+    commentsCount: 0,
     tags: ['привычки', 'AI', 'мотивация'],
     createdAt: '2026-06-17T07:00:00Z',
     testingSlots: 10,
@@ -208,9 +295,15 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       'Платформа, где домашние повара продают готовую еду соседям. Никаких ресторанов — только живые люди и настоящие рецепты из разных культур.',
     category: 'Маркетплейс',
-    author: { id: 'u13', username: 'foodie_dev', avatarInitials: 'FD' },
+    author: {
+      id: 'u13',
+      username: 'foodie_dev',
+      avatarInitials: 'FD',
+      avatarColor: '#C0392B',
+    },
     likesCount: 88,
     isLiked: false,
+    commentsCount: 1,
     tags: ['еда', 'сообщество', 'маркетплейс'],
     createdAt: '2026-06-17T12:00:00Z',
     testingSlots: 25,
@@ -221,7 +314,12 @@ export const MOCK_PROJECTS: Project[] = [
     comments: [
       {
         id: 'c6',
-        author: { id: 'u14', username: 'food_lover', avatarInitials: 'FL' },
+        author: {
+          id: 'u14',
+          username: 'food_lover',
+          avatarInitials: 'FL',
+          avatarColor: '#3C241C',
+        },
         text: 'Давно мечтал о чём-то подобном в нашем районе!',
         createdAt: '2026-06-17T14:00:00Z',
       },
@@ -233,9 +331,15 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       'Подключите к GitHub — ИИ оставляет комментарии к PR как опытный сеньор: находит баги, предлагает рефакторинг, проверяет безопасность.',
     category: 'Инструмент разработчика',
-    author: { id: 'u15', username: 'devtools_pro', avatarInitials: 'DP' },
+    author: {
+      id: 'u15',
+      username: 'devtools_pro',
+      avatarInitials: 'DP',
+      avatarColor: '#1E8449',
+    },
     likesCount: 102,
     isLiked: false,
+    commentsCount: 1,
     tags: ['GitHub', 'AI', 'code review'],
     createdAt: '2026-06-18T09:00:00Z',
     testingSlots: 7,
@@ -246,7 +350,12 @@ export const MOCK_PROJECTS: Project[] = [
     comments: [
       {
         id: 'c7',
-        author: { id: 'u16', username: 'senior_dev', avatarInitials: 'SD' },
+        author: {
+          id: 'u16',
+          username: 'senior_dev',
+          avatarInitials: 'SD',
+          avatarColor: '#3C241C',
+        },
         text: 'Это убьёт половину задач нашего ревью-процесса. Записываюсь!',
         createdAt: '2026-06-18T11:00:00Z',
       },
@@ -258,9 +367,15 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       'Приложение следит за временем за компьютером, напоминает о перерывах и упражнениях. Интегрируется с календарём — не отвлекает в важные встречи.',
     category: 'Десктоп-приложение',
-    author: { id: 'u17', username: 'wellness_app', avatarInitials: 'WA' },
+    author: {
+      id: 'u17',
+      username: 'wellness_app',
+      avatarInitials: 'WA',
+      avatarColor: '#117A65',
+    },
     likesCount: 33,
     isLiked: false,
+    commentsCount: 0,
     tags: ['здоровье', 'продуктивность', 'macOS'],
     createdAt: '2026-06-18T14:00:00Z',
     testingSlots: 18,
@@ -276,9 +391,15 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       'Опишите свою идею в нескольких предложениях — сервис генерирует структуру питч-дека, слайды и тезисы для инвесторов.',
     category: 'Веб-сервис',
-    author: { id: 'u18', username: 'startup_wizard', avatarInitials: 'SW' },
+    author: {
+      id: 'u18',
+      username: 'startup_wizard',
+      avatarInitials: 'SW',
+      avatarColor: '#B7950B',
+    },
     likesCount: 76,
     isLiked: false,
+    commentsCount: 1,
     tags: ['стартап', 'AI', 'презентации'],
     createdAt: '2026-06-19T10:00:00Z',
     testingSlots: 6,
@@ -289,7 +410,12 @@ export const MOCK_PROJECTS: Project[] = [
     comments: [
       {
         id: 'c8',
-        author: { id: 'u19', username: 'investor_lens', avatarInitials: 'IL' },
+        author: {
+          id: 'u19',
+          username: 'investor_lens',
+          avatarInitials: 'IL',
+          avatarColor: '#3C241C',
+        },
         text: 'Как раз готовлюсь к Demo Day — попробую!',
         createdAt: '2026-06-19T12:00:00Z',
       },
@@ -301,9 +427,15 @@ export const MOCK_PROJECTS: Project[] = [
     description:
       'Гиперлокальная сеть: попросите соседей помочь с мелкими задачами или предложите свои услуги. Выгулять собаку, принять посылку, починить кран.',
     category: 'Мобильное приложение',
-    author: { id: 'u20', username: 'community_builder', avatarInitials: 'CB' },
+    author: {
+      id: 'u20',
+      username: 'community_builder',
+      avatarInitials: 'CB',
+      avatarColor: '#884EA0',
+    },
     likesCount: 47,
     isLiked: false,
+    commentsCount: 0,
     tags: ['сообщество', 'соседи', 'помощь'],
     createdAt: '2026-06-19T16:00:00Z',
     testingSlots: 30,
@@ -323,9 +455,11 @@ export const MOCK_PROJECTS: Project[] = [
       id: 'current-user',
       username: 'test_user_42',
       avatarInitials: 'ВЫ',
+      avatarColor: '#3C241C',
     },
     likesCount: 12,
     isLiked: false,
+    commentsCount: 0,
     tags: ['аналитика', 'команды', 'продуктивность'],
     createdAt: '2026-06-20T09:00:00Z',
     testingSlots: 10,

@@ -97,6 +97,7 @@ class FeedModel {
       const project = this.projects.find(p => p.id === projectId);
       if (project) {
         project.comments = [...project.comments, res.comment];
+        project.commentsCount += 1;
       }
     });
   }

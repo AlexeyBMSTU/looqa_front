@@ -22,10 +22,10 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      // Все запросы /api/* Vite перенаправляет на nginx (:80)
       '/api': {
         target: 'http://localhost:80',
         changeOrigin: true,
+        ws: true, // проксирование WebSocket через тот же прокси
       },
     },
   },

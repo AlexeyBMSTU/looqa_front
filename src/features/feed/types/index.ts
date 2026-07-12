@@ -17,6 +17,8 @@ export interface Author {
   id: string;
   username: string;
   avatarInitials: string; // e.g. "AB" from username
+  avatarColor: string;
+  avatarUrl?: string;
 }
 
 export interface Comment {
@@ -34,6 +36,7 @@ export interface Project {
   author: Author;
   likesCount: number;
   isLiked: boolean; // current user liked
+  commentsCount: number;
   comments: Comment[];
   tags: string[];
   createdAt: string;

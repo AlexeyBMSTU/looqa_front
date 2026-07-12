@@ -9,6 +9,7 @@ export interface ProjectApplication {
     id: string;
     username: string;
     avatarInitials: string;
+    avatarColor: string;
   };
   experience: 'none' | 'some' | 'expert';
   comment: string;
@@ -30,6 +31,7 @@ export interface CreateProjectRequest {
   testingSlots: number;
   url?: string;
   idea?: string;
+  attachments?: Array<{ name: string; url: string; type: string }>;
 }
 
 export interface SubmitReviewRequest {

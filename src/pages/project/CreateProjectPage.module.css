@@ -120,6 +120,88 @@
   background: rgba(60, 36, 28, 0.04) !important;
 }
 
+/* ── File upload ────────────────────────────────────── */
+.uploadArea {
+  border: 2px dashed rgba(60, 36, 28, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+.uploadArea:hover {
+  border-color: rgba(60, 36, 28, 0.45);
+}
+
+.uploadLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  cursor: pointer;
+  gap: 0.25rem;
+}
+.fileInput {
+  display: none;
+}
+.uploadIcon {
+  font-size: 1.5rem;
+}
+.uploadText {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-brown);
+}
+.uploadHint {
+  font-size: 0.75rem;
+  color: rgba(60, 36, 28, 0.45);
+}
+
+.fileList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid rgba(60, 36, 28, 0.1);
+}
+.fileItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: var(--font-size-sm);
+  border-bottom: 1px solid rgba(60, 36, 28, 0.06);
+}
+.fileName {
+  flex: 1;
+  color: var(--color-brown);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fileStatus {
+  color: rgba(60, 36, 28, 0.45);
+  font-size: 0.8rem;
+}
+.fileStatusOk {
+  color: #15803d;
+  font-size: 0.8rem;
+}
+.fileStatusErr {
+  color: #dc2626;
+  font-size: 0.8rem;
+}
+.fileRemove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(60, 36, 28, 0.35);
+  font-size: 1.1rem;
+  padding: 0 0.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.fileRemove:hover {
+  color: var(--color-brown);
+}
+
 /* ── Responsive ── */
 @media (max-width: 767px) {
   .page {

@@ -5,10 +5,11 @@ export interface UserProfile {
   username: string;
   displayName: string;
   bio: string;
-  email: string | null; // null = не привязана
+  email: string | null;
   emailVerified: boolean;
   avatarInitials: string;
-  avatarColor: string; // hex, для кастомного фона аватарки
+  avatarColor: string;
+  avatarUrl?: string | null;
   role: 'qa' | 'owner';
   createdAt: string;
 }
@@ -29,6 +30,7 @@ export interface UpdateProfileRequest {
   displayName?: string;
   bio?: string;
   avatarColor?: string;
+  avatarUrl?: string;
 }
 
 export interface UpdateEmailRequest {
@@ -40,21 +42,10 @@ export interface UpdatePasswordRequest {
   newPassword: string;
 }
 
-export interface OwnerProject {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  tags: string[];
-  testingSlots: number;
-  likesCount: number;
-  createdAt: string;
-}
-
 export interface ProfileResponse {
   profile: UserProfile;
   applications: AppliedProject[];
-  projects: OwnerProject[];
+  projects: Project[];
 }
 
 export interface UpdateProfileResponse {
@@ -68,6 +59,7 @@ export interface PublicProfile {
   bio: string;
   avatarInitials: string;
   avatarColor: string;
+  avatarUrl?: string;
   role: 'qa' | 'owner';
   createdAt: string;
 }

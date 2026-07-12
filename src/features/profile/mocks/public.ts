@@ -1,8 +1,13 @@
 import type { PublicProfileResponse } from '../types';
 
 // Вспомогательная функция — создаёт автора из username и initials
-function author(id: string, username: string, initials: string) {
-  return { id, username, avatarInitials: initials };
+function author(
+  id: string,
+  username: string,
+  initials: string,
+  avatarColor = '#3C241C'
+) {
+  return { id, username, avatarInitials: initials, avatarColor };
 }
 
 export const MOCK_PUBLIC_PROFILES: Record<string, PublicProfileResponse> = {
@@ -29,6 +34,7 @@ export const MOCK_PUBLIC_PROFILES: Record<string, PublicProfileResponse> = {
         author: author('u1', 'Pavel_dev', 'PD'),
         likesCount: 24,
         isLiked: false,
+        commentsCount: 0,
         comments: [
           {
             id: 'c1',
@@ -65,6 +71,7 @@ export const MOCK_PUBLIC_PROFILES: Record<string, PublicProfileResponse> = {
         author: author('u3', 'green_anna', 'GA'),
         likesCount: 41,
         isLiked: true,
+        commentsCount: 0,
         comments: [
           {
             id: 'c2',
@@ -107,6 +114,7 @@ export const MOCK_PUBLIC_PROFILES: Record<string, PublicProfileResponse> = {
         author: author('u6', 'lang_master', 'LM'),
         likesCount: 17,
         isLiked: false,
+        commentsCount: 0,
         comments: [],
       },
     ],
@@ -136,6 +144,7 @@ export const MOCK_PUBLIC_PROFILES: Record<string, PublicProfileResponse> = {
         author: author('u7', 'design_kate', 'DK'),
         likesCount: 63,
         isLiked: false,
+        commentsCount: 0,
         comments: [
           {
             id: 'c4',
@@ -172,6 +181,7 @@ export const MOCK_PUBLIC_PROFILES: Record<string, PublicProfileResponse> = {
         author: author('u9', 'fin_startup', 'FS'),
         likesCount: 38,
         isLiked: false,
+        commentsCount: 0,
         comments: [],
       },
     ],
@@ -201,6 +211,7 @@ export const MOCK_PUBLIC_PROFILES: Record<string, PublicProfileResponse> = {
         author: author('u10', 'team_lead_igor', 'TI'),
         likesCount: 29,
         isLiked: true,
+        commentsCount: 0,
         comments: [
           {
             id: 'c5',
@@ -237,6 +248,7 @@ export const MOCK_PUBLIC_PROFILES: Record<string, PublicProfileResponse> = {
         author: author('u12', 'habit_hacker', 'HH'),
         likesCount: 55,
         isLiked: false,
+        commentsCount: 0,
         comments: [],
       },
     ],
@@ -266,6 +278,7 @@ export const MOCK_PUBLIC_PROFILES: Record<string, PublicProfileResponse> = {
         author: author('u13', 'foodie_dev', 'FD'),
         likesCount: 88,
         isLiked: false,
+        commentsCount: 0,
         comments: [
           {
             id: 'c6',
@@ -302,6 +315,7 @@ export const MOCK_PUBLIC_PROFILES: Record<string, PublicProfileResponse> = {
         author: author('u15', 'devtools_pro', 'DP'),
         likesCount: 102,
         isLiked: false,
+        commentsCount: 0,
         comments: [
           {
             id: 'c7',
@@ -338,6 +352,7 @@ export const MOCK_PUBLIC_PROFILES: Record<string, PublicProfileResponse> = {
         author: author('u17', 'wellness_app', 'WA'),
         likesCount: 33,
         isLiked: false,
+        commentsCount: 0,
         comments: [],
       },
     ],
@@ -367,6 +382,7 @@ export const MOCK_PUBLIC_PROFILES: Record<string, PublicProfileResponse> = {
         author: author('u18', 'startup_wizard', 'SW'),
         likesCount: 76,
         isLiked: false,
+        commentsCount: 0,
         comments: [
           {
             id: 'c8',
@@ -403,6 +419,7 @@ export const MOCK_PUBLIC_PROFILES: Record<string, PublicProfileResponse> = {
         author: author('u20', 'community_builder', 'CB'),
         likesCount: 47,
         isLiked: false,
+        commentsCount: 0,
         comments: [],
       },
     ],

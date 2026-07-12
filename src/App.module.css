@@ -2,4 +2,6 @@
   padding-top: var(--navbar-padding);
   flex: 1 0 auto;
   background-color: var(--color-beige);
+  min-height: 100vh;
+  align-items: center;
 }

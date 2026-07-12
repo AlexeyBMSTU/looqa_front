@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Form, Input, Button, message } from 'antd';
 import { profileModel } from '@/features/profile/models';
+import { uploadAvatar } from '@/features/upload';
 import styles from './SettingsTab.module.css';
+import { GENERAL_PORT } from '@/env';
 
 interface ProfileFormValues {
   displayName: string;
@@ -22,9 +25,9 @@ export const SettingsTab = observer(() => {
   const [emailInput, setEmailInput] = useState('');
   const [emailSaving, setEmailSaving] = useState(false);
 
-  const { profile, isSaving, saveSuccess, error } = profileModel;
+  const { profile, isSaving, saveSuccess } = profileModel;
 
-  // Pre-fill profile form when profile loads
+  // Предзаполняем форму профиля
   useEffect(() => {
     if (profile) {
       profileForm.setFieldsValue({
@@ -35,12 +38,14 @@ export const SettingsTab = observer(() => {
     }
   }, [profile, profileForm]);
 
-  // Show success message and clear state after saving profile
+  // Нотифай после успешного сохранения профиля
+  const prevSaveSuccess = useRef(false);
   useEffect(() => {
-    if (saveSuccess) {
+    if (saveSuccess && !prevSaveSuccess.current) {
       message.success('Профиль обновлён');
       profileModel.clearSaveState();
     }
+    prevSaveSuccess.current = saveSuccess;
   }, [saveSuccess]);
 
   const handleProfileSave = async (values: ProfileFormValues) => {
@@ -52,35 +57,62 @@ export const SettingsTab = observer(() => {
   };
 
   const handleEmailBind = async () => {
-    if (!emailInput.trim()) return;
+    const email = emailInput.trim();
+    if (!email) return;
     setEmailSaving(true);
-    await profileModel.updateEmail(emailInput.trim());
+    await profileModel.sendEmailVerification(email);
     setEmailSaving(false);
-    if (!profileModel.error) {
-      message.success('Email привязан');
+    // Очищаем поле только если письмо отправлено (состояние изменилось)
+    if (profileModel.emailVerificationSent) {
       setEmailInput('');
     }
   };
 
+  const handleRemoveEmail = async () => {
+    setEmailSaving(true);
+    await profileModel.removeEmail();
+    setEmailSaving(false);
+  };
+
   const handlePasswordChange = async (values: PasswordFormValues) => {
-    await profileModel.updatePassword(
+    const ok = await profileModel.updatePassword(
       values.currentPassword,
       values.newPassword
     );
-    if (!profileModel.error) {
-      message.success('Пароль изменён');
-      passwordForm.resetFields();
+    if (ok) passwordForm.resetFields();
+  };
+
+  const [avatarUploading, setAvatarUploading] = useState(false);
+
+  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    e.target.value = '';
+    if (file.size > 5 * 1024 * 1024) {
+      message.error('Аватарка должна быть не более 5MB');
+      return;
+    }
+    setAvatarUploading(true);
+    try {
+      const res = await uploadAvatar(file);
+      await profileModel.updateProfile({ avatarUrl: res.url });
+    } catch {
+      message.error('Не удалось загрузить аватарку');
+    } finally {
+      setAvatarUploading(false);
     }
   };
 
-  // Live preview: watch avatarColor field
+  const handleRemoveAvatar = () =>
+    profileModel.updateProfile({ avatarUrl: '' });
+
   const avatarColorValue = Form.useWatch('avatarColor', profileForm);
   const previewColor = avatarColorValue ?? profile?.avatarColor ?? '#3C241C';
   const previewInitials = profile?.avatarInitials ?? '??';
 
   return (
     <div className={styles.root}>
-      {/* ── Секция 1: Основная информация ── */}
+      {/* ── Основная информация ── */}
       <section className={styles.section}>
         <h3 className={styles.sectionTitle}>Основная информация</h3>
 
@@ -102,21 +134,66 @@ export const SettingsTab = observer(() => {
             <Input.TextArea rows={4} placeholder="Расскажите о себе..." />
           </Form.Item>
 
-          <Form.Item name="avatarColor" label="Цвет аватарки">
-            <div className={styles.colorRow}>
-              <input
-                type="color"
-                className={styles.colorPicker}
-                value={previewColor}
-                onChange={e =>
-                  profileForm.setFieldValue('avatarColor', e.target.value)
-                }
-              />
+          <Form.Item name="avatarColor" label="Аватарка">
+            <div className={styles.avatarSection}>
+              {/* Превью */}
               <div
-                className={styles.avatarPreview}
-                style={{ backgroundColor: previewColor }}
+                className={styles.avatarPreviewLarge}
+                style={{
+                  backgroundColor: previewColor,
+                  backgroundImage: profile?.avatarUrl
+                    ? `url(${GENERAL_PORT}${profile.avatarUrl})`
+                    : undefined,
+                }}
               >
-                {previewInitials}
+                {!profile?.avatarUrl && previewInitials}
+              </div>
+
+              <div className={styles.avatarControls}>
+                {/* Загрузка фото */}
+                <label
+                  className={`${styles.avatarUploadBtn} ${avatarUploading ? styles.avatarUploadBtnDisabled : ''}`}
+                >
+                  <input
+                    type="file"
+                    accept="image/png,image/jpeg,image/gif,image/webp"
+                    className={styles.fileInput}
+                    disabled={avatarUploading}
+                    onChange={handleAvatarUpload}
+                  />
+                  {avatarUploading
+                    ? '⏳ Загружается...'
+                    : '🖼 Загрузить фото / GIF'}
+                </label>
+
+                {/* Цвет как фолбэк */}
+                <div className={styles.colorPickerRow}>
+                  <span className={styles.colorLabel}>или цвет:</span>
+                  <input
+                    type="color"
+                    className={styles.colorPicker}
+                    value={previewColor}
+                    onChange={e =>
+                      profileForm.setFieldValue('avatarColor', e.target.value)
+                    }
+                  />
+                  <div
+                    className={styles.avatarPreview}
+                    style={{ backgroundColor: previewColor }}
+                  >
+                    {previewInitials}
+                  </div>
+                </div>
+
+                {profile?.avatarUrl && (
+                  <button
+                    type="button"
+                    className={styles.removeAvatarBtn}
+                    onClick={handleRemoveAvatar}
+                  >
+                    Удалить фото
+                  </button>
+                )}
               </div>
             </div>
           </Form.Item>
@@ -135,7 +212,7 @@ export const SettingsTab = observer(() => {
 
       <hr className={styles.divider} />
 
-      {/* ── Секция 2: Безопасность ── */}
+      {/* ── Безопасность ── */}
       <section className={styles.section}>
         <h3 className={styles.sectionTitle}>Безопасность</h3>
 
@@ -144,9 +221,82 @@ export const SettingsTab = observer(() => {
           <h4 className={styles.subsectionTitle}>Email</h4>
 
           {profile?.email ? (
-            <div className={styles.emailRow}>
-              <span className={styles.emailValue}>{profile.email}</span>
-              <span className={styles.emailVerifiedBadge}>✓ Привязан</span>
+            profileModel.emailRemovePending ? (
+              <div className={styles.emailSent}>
+                <span>✉️</span>
+                <p>
+                  Письмо с подтверждением отправлено на{' '}
+                  <strong>{profile.email}</strong>
+                </p>
+                <p className={styles.emailHint}>
+                  Перейдите по ссылке в письме чтобы отвязать email
+                </p>
+                <Button
+                  size="small"
+                  onClick={() => profileModel.resetEmailRemoveState()}
+                >
+                  Отмена
+                </Button>
+              </div>
+            ) : (
+              <div className={styles.emailBound}>
+                <div className={styles.emailRow}>
+                  <span className={styles.emailValue}>{profile.email}</span>
+                  {profile.emailVerified ? (
+                    <span className={styles.emailVerifiedBadge}>
+                      ✓ Подтверждён
+                    </span>
+                  ) : (
+                    <span className={styles.emailPendingBadge}>
+                      ⚠ Не подтверждён
+                    </span>
+                  )}
+                </div>
+                {!profile.emailVerified && (
+                  <p className={styles.emailHint}>
+                    Проверьте почту или отправьте письмо повторно
+                  </p>
+                )}
+                <div className={styles.emailActions}>
+                  {!profile.emailVerified && (
+                    <Button
+                      size="small"
+                      loading={emailSaving}
+                      onClick={() =>
+                        profileModel.sendEmailVerification(profile!.email!)
+                      }
+                      className={styles.submitBtn}
+                    >
+                      Отправить повторно
+                    </Button>
+                  )}
+                  <Button
+                    size="small"
+                    loading={emailSaving}
+                    onClick={handleRemoveEmail}
+                    className={styles.removeEmailBtn}
+                  >
+                    Отвязать
+                  </Button>
+                </div>
+              </div>
+            )
+          ) : profileModel.emailVerificationSent ? (
+            <div className={styles.emailSent}>
+              <span>✉️</span>
+              <p>
+                Письмо отправлено на{' '}
+                <strong>{profileModel.pendingEmail}</strong>
+              </p>
+              <p className={styles.emailHint}>
+                Перейдите по ссылке в письме чтобы подтвердить email
+              </p>
+              <Button
+                size="small"
+                onClick={() => profileModel.resetEmailVerificationState()}
+              >
+                Изменить email
+              </Button>
             </div>
           ) : (
             <div className={styles.emailBindRow}>
@@ -161,8 +311,8 @@ export const SettingsTab = observer(() => {
                   className={styles.emailInput}
                 />
                 <Button
-                  onClick={handleEmailBind}
                   loading={emailSaving}
+                  onClick={handleEmailBind}
                   className={styles.submitBtn}
                 >
                   Привязать
@@ -174,7 +324,7 @@ export const SettingsTab = observer(() => {
 
         <hr className={styles.divider} />
 
-        {/* Password */}
+        {/* Пароль */}
         <div className={styles.subsection}>
           <h4 className={styles.subsectionTitle}>Пароль</h4>
 
@@ -197,7 +347,7 @@ export const SettingsTab = observer(() => {
               label="Новый пароль"
               rules={[
                 { required: true, message: 'Введите новый пароль' },
-                { min: 6, message: 'Минимум 6 символов' },
+                { min: 8, message: 'Минимум 8 символов' },
               ]}
             >
               <Input.Password placeholder="••••••••" />
@@ -221,8 +371,6 @@ export const SettingsTab = observer(() => {
             >
               <Input.Password placeholder="••••••••" />
             </Form.Item>
-
-            {error && <p className={styles.errorText}>{error}</p>}
 
             <Form.Item>
               <Button

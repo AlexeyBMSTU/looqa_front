@@ -13,6 +13,7 @@ import {
   createProjectAdapter,
   getProjectApplicationsAdapter,
   updateApplicationStatusAdapter,
+  getMyApplicationAdapter,
 } from '../adapters';
 
 class ProjectDetailModel {
@@ -30,7 +31,10 @@ class ProjectDetailModel {
   // Заявки на тестирование (только для owner)
   applications: ProjectApplication[] = [];
   isLoadingApplications = false;
-  isUpdatingApplication: string | null = null; // id заявки которую сейчас обновляем
+  isUpdatingApplication: string | null = null;
+
+  // Статус моей заявки (для тестировщика)
+  myApplication: ProjectApplication | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -40,6 +44,11 @@ class ProjectDetailModel {
     return !!authStore.userID && this.project?.author.id === authStore.userID;
   }
 
+  // Текущий QA зарегистрирован и принят в команду
+  get isAcceptedTester(): boolean {
+    return this.myApplication?.status === 'accepted';
+  }
+
   async load(id: string): Promise<void> {
     runInAction(() => {
       this.isLoading = true;
@@ -47,6 +56,7 @@ class ProjectDetailModel {
       this.project = null;
       this.reviewSuccess = false;
       this.applications = [];
+      this.myApplication = null;
     });
     try {
       const project = await getProjectAdapter(id);
@@ -54,15 +64,29 @@ class ProjectDetailModel {
         this.project = project;
         this.isLoading = false;
       });
-      // Если это наш проект — сразу грузим заявки
       if (authStore.userID && project.author.id === authStore.userID) {
+        // Owner — грузим все заявки
         this.loadApplications(id);
+      } else if (authStore.isQA) {
+        // QA — грузим только свою заявку
+        this.loadMyApplication(id);
       }
     } catch (e) {
       runInAction(() => {
         this.error = e instanceof Error ? e.message : 'Ошибка загрузки';
         this.isLoading = false;
       });
+    }
+  }
+
+  async loadMyApplication(projectId: string): Promise<void> {
+    try {
+      const app = await getMyApplicationAdapter(projectId);
+      runInAction(() => {
+        this.myApplication = app;
+      });
+    } catch {
+      // Нет заявки — это нормально
     }
   }
 

@@ -5,6 +5,7 @@ import { Skeleton, Button } from 'antd';
 import { publicProfileModel } from '@/features/profile/models/public';
 import { authStore } from '@/features/auth/store';
 import { ProjectCard } from '@/pages/feed/components/ProjectCard/ProjectCard';
+import { Avatar } from '@/shared/components/Avatar/Avatar';
 import styles from './UserProfilePage.module.css';
 
 function formatDate(iso: string) {
@@ -45,12 +46,13 @@ export const UserProfilePage = observer(() => {
             <Skeleton active avatar={{ size: 80 }} paragraph={{ rows: 4 }} />
           ) : (
             <>
-              <div
+              <Avatar
+                initials={profile.avatarInitials}
+                color={profile.avatarColor}
+                avatarUrl={profile.avatarUrl}
+                size="lg"
                 className={styles.avatar}
-                style={{ backgroundColor: profile.avatarColor }}
-              >
-                {profile.avatarInitials}
-              </div>
+              />
 
               <h2 className={styles.displayName}>{profile.displayName}</h2>
               <p className={styles.username}>@{profile.username}</p>
@@ -122,6 +124,12 @@ export const UserProfilePage = observer(() => {
                       hideAuthor
                       key={project.id}
                       project={project}
+                      onLike={id => publicProfileModel.toggleLike(id)}
+                      onLoadComments={id => publicProfileModel.loadComments(id)}
+                      onAddComment={(id, text) =>
+                        publicProfileModel.addComment(id, text)
+                      }
+                      loadingCommentsFor={publicProfileModel.loadingCommentsFor}
                     />
                   ))}
                 </div>

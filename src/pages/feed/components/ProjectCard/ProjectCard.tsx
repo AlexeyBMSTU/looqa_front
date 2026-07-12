@@ -10,11 +10,16 @@ import type { Project } from '@/features/feed/types';
 import { modalStore } from '@/shared/components/Modal/modalStore';
 import { ApplyModal } from '@/features/apply/components/ApplyModal/ApplyModal';
 import { UserLink } from '@/shared/components/UserLink/UserLink';
+import { Avatar } from '@/shared/components/Avatar/Avatar';
 import styles from './ProjectCard.module.css';
 
 interface ProjectCardProps {
   project: Project;
   hideAuthor?: boolean;
+  onLike?: (projectId: string) => void;
+  onLoadComments?: (projectId: string) => void;
+  onAddComment?: (projectId: string, text: string) => Promise<void>;
+  loadingCommentsFor?: string | null;
 }
 
 function formatDate(dateStr: string): string {
@@ -25,7 +30,14 @@ function formatDate(dateStr: string): string {
 }
 
 export const ProjectCard = observer(
-  ({ project, hideAuthor = false }: ProjectCardProps) => {
+  ({
+    project,
+    hideAuthor = false,
+    onLike,
+    onLoadComments,
+    onAddComment,
+    loadingCommentsFor: externalLoadingCommentsFor,
+  }: ProjectCardProps) => {
     const [commentsOpen, setCommentsOpen] = useState(false);
     const [commentText, setCommentText] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -38,15 +50,22 @@ export const ProjectCard = observer(
     };
 
     const handleLike = () => {
-      feedModel.toggleLike(project.id);
+      if (onLike) {
+        onLike(project.id);
+      } else {
+        feedModel.toggleLike(project.id);
+      }
     };
 
     const handleToggleComments = () => {
       const opening = !commentsOpen;
       setCommentsOpen(opening);
-      // При открытии — всегда подгружаем актуальные комментарии с сервера
       if (opening) {
-        feedModel.loadComments(project.id);
+        if (onLoadComments) {
+          onLoadComments(project.id);
+        } else {
+          feedModel.loadComments(project.id);
+        }
       }
     };
 
@@ -55,7 +74,11 @@ export const ProjectCard = observer(
       if (!trimmed || isSubmitting) return;
       setIsSubmitting(true);
       try {
-        await feedModel.addComment(project.id, trimmed);
+        if (onAddComment) {
+          await onAddComment(project.id, trimmed);
+        } else {
+          await feedModel.addComment(project.id, trimmed);
+        }
         setCommentText('');
       } finally {
         setIsSubmitting(false);
@@ -68,7 +91,10 @@ export const ProjectCard = observer(
       }
     };
 
-    const isLoadingComments = feedModel.loadingCommentsFor === project.id;
+    const isLoadingComments =
+      externalLoadingCommentsFor !== undefined
+        ? externalLoadingCommentsFor === project.id
+        : feedModel.loadingCommentsFor === project.id;
     const comments = project.comments ?? [];
 
     return (
@@ -77,9 +103,13 @@ export const ProjectCard = observer(
         <div className={styles.topRow}>
           {!hideAuthor && (
             <div className={styles.authorInfo}>
-              <div className={styles.avatar}>
-                {project.author.avatarInitials}
-              </div>
+              <Avatar
+                initials={project.author.avatarInitials}
+                color={project.author.avatarColor}
+                avatarUrl={project.author.avatarUrl}
+                size="sm"
+                className={styles.avatar}
+              />
               <UserLink
                 username={project.author.username}
                 className={styles.username}
@@ -139,7 +169,7 @@ export const ProjectCard = observer(
             aria-label="Комментарии"
           >
             <MessageOutlined />
-            <span className={styles.actionCount}>{comments.length}</span>
+            <span className={styles.actionCount}>{project.commentsCount}</span>
           </button>
 
           <div className={styles.actionsSpacer} />
@@ -174,9 +204,13 @@ export const ProjectCard = observer(
               <ul className={styles.commentList}>
                 {comments.map(comment => (
                   <li key={comment.id} className={styles.commentItem}>
-                    <div className={styles.commentAvatar}>
-                      {comment.author.avatarInitials}
-                    </div>
+                    <Avatar
+                      initials={comment.author.avatarInitials}
+                      color={comment.author.avatarColor}
+                      avatarUrl={comment.author.avatarUrl}
+                      size="sm"
+                      className={styles.commentAvatar}
+                    />
                     <div className={styles.commentBody}>
                       <div className={styles.commentMeta}>
                         <UserLink

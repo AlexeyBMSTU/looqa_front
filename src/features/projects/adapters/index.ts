@@ -21,7 +21,12 @@ let mockApplications: ProjectApplication[] = [
   {
     id: 'pa-1',
     projectId: '13',
-    applicant: { id: 'u2', username: 'Maria_qa', avatarInitials: 'MQ' },
+    applicant: {
+      id: 'u2',
+      username: 'Maria_qa',
+      avatarInitials: 'MQ',
+      avatarColor: '#3C241C',
+    },
     experience: 'some',
     comment:
       'Работаю с метриками в своей команде, хочу протестировать интеграции.',
@@ -31,7 +36,12 @@ let mockApplications: ProjectApplication[] = [
   {
     id: 'pa-2',
     projectId: '13',
-    applicant: { id: 'u4', username: 'eco_tester', avatarInitials: 'ET' },
+    applicant: {
+      id: 'u4',
+      username: 'eco_tester',
+      avatarInitials: 'ET',
+      avatarColor: '#3C241C',
+    },
     experience: 'none',
     comment: '',
     status: 'pending',
@@ -40,7 +50,12 @@ let mockApplications: ProjectApplication[] = [
   {
     id: 'pa-3',
     projectId: '13',
-    applicant: { id: 'u8', username: 'ux_pro', avatarInitials: 'UP' },
+    applicant: {
+      id: 'u8',
+      username: 'ux_pro',
+      avatarInitials: 'UP',
+      avatarColor: '#3C241C',
+    },
     experience: 'expert',
     comment: 'Занимаюсь аналитикой продуктов, ищу инструменты для команды.',
     status: 'accepted',
@@ -63,7 +78,12 @@ async function mockSubmitReview(req: SubmitReviewRequest): Promise<Review> {
   if (!project) throw new Error(`Project ${req.projectId} not found`);
   const review: Review = {
     id: `r-${Date.now()}`,
-    author: { id: 'current-user', username: 'Вы', avatarInitials: 'ВЫ' },
+    author: {
+      id: 'current-user',
+      username: 'Вы',
+      avatarInitials: 'ВЫ',
+      avatarColor: '#3C241C',
+    },
     rating: req.rating,
     text: req.text,
     createdAt: new Date().toISOString(),
@@ -84,9 +104,15 @@ async function mockCreateProject(req: CreateProjectRequest): Promise<Project> {
     testingSlots: req.testingSlots,
     url: req.url,
     idea: req.idea,
-    author: { id: 'current-user', username: 'Вы', avatarInitials: 'ВЫ' },
+    author: {
+      id: 'current-user',
+      username: 'Вы',
+      avatarInitials: 'ВЫ',
+      avatarColor: '#3C241C',
+    },
     likesCount: 0,
     isLiked: false,
+    commentsCount: 0,
     createdAt: new Date().toISOString(),
     attachments: [],
     reviews: [],
@@ -156,4 +182,24 @@ export async function updateApplicationStatusAdapter(
     url: `/projects/${req.projectId}/applications/${req.applicationId}/`,
     body: { status: req.status },
   });
+}
+
+// Статус моей заявки на проект (для тестировщика)
+export async function getMyApplicationAdapter(
+  projectId: string
+): Promise<ProjectApplication | null> {
+  if (getFlag(FLAGS.MOCK_FEED)) {
+    await delay(200);
+    const app = mockApplications.find(
+      a => a.projectId === projectId && a.applicant.id === 'current-user'
+    );
+    return app ? { ...app } : null;
+  }
+  try {
+    return await apiService.get<ProjectApplication>({
+      url: `/projects/${projectId}/my-application/`,
+    });
+  } catch {
+    return null;
+  }
 }

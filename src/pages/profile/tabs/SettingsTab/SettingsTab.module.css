@@ -61,7 +61,89 @@
   opacity: 0.55 !important;
 }
 
-/* ── Avatar color picker row ──────────────────────────────── */
+/* ── Avatar color picker row ─────────────────────────────────────── */
+.avatarSection {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.avatarPreviewLarge {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-brown);
+  color: var(--color-beige);
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.avatarControls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding-top: 0.25rem;
+}
+
+.avatarUploadBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.875rem;
+  border: 1px solid rgba(60, 36, 28, 0.25);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  color: var(--color-brown);
+  font-family: inherit;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.avatarUploadBtn:hover {
+  background: rgba(60, 36, 28, 0.06);
+}
+.avatarUploadBtnDisabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fileInput {
+  display: none;
+}
+
+.colorPickerRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.colorLabel {
+  font-size: var(--font-size-xs);
+  color: rgba(60, 36, 28, 0.55);
+}
+
+.removeAvatarBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: var(--font-size-xs);
+  color: rgba(60, 36, 28, 0.45);
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: underline;
+}
+.removeAvatarBtn:hover {
+  color: var(--color-brown);
+}
+
+/* legacy color row (kept for colorPicker/avatarPreview) */
 .colorRow {
   display: flex;
   align-items: center;
@@ -143,4 +225,45 @@
   color: #c0392b;
   font-size: var(--font-size-sm);
   margin: 0 0 0.75rem;
+}
+
+/* ── Email bound state ────────────────────────────────────── */
+.emailBound {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.emailActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.emailPendingBadge {
+  font-size: 0.75rem;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 0.1rem 0.5rem;
+  border-radius: 50px;
+}
+
+.emailSent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(183, 206, 228, 0.2);
+  border-radius: 8px;
+}
+
+.emailHint {
+  font-size: var(--font-size-xs);
+  color: rgba(60, 36, 28, 0.55);
+  margin: 0;
+}
+
+.removeEmailBtn.removeEmailBtn {
+  border-color: rgba(60, 36, 28, 0.3) !important;
+  color: rgba(60, 36, 28, 0.6) !important;
 }

@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { mainController } from './MainController';
 import { PageTitle } from '@/shared/components/PageTitle/PageTitle';
 import { NotFoundPage } from '@/pages/notFound/NotFoundPage';
+import { Loader } from '@/shared/components/Loader/Loader';
 
 export const RouterController: FC = () => {
   const [routes, setRoutes] = useState<RouteConfig[]>([]);
@@ -25,7 +26,7 @@ export const RouterController: FC = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Загрузка приложения...</div>;
+    return <Loader />;
   }
 
   return (

@@ -1,5 +1,6 @@
 import { GENERAL_URL } from '@/env';
 import { authStore } from '@/features/auth/store';
+import { convertSnakeToCamel } from './utils';
 
 interface DataProps {
   url: string;
@@ -63,7 +64,8 @@ class ApiService {
       throw error;
     }
 
-    return await response.json();
+    const data = await response.json();
+    return convertSnakeToCamel<T>(data);
   }
 
   async get<T>(data: DataProps): Promise<T> {

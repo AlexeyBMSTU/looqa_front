@@ -1,7 +1,10 @@
+import React from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { observer } from 'mobx-react-lite';
-import { Form, Input, Select, InputNumber, Button } from 'antd';
+import { Form, Input, Select, InputNumber, Button, message } from 'antd';
 import { projectDetailModel } from '@/features/projects/models';
+import { uploadAttachment } from '@/features/upload';
 import styles from './CreateProjectPage.module.css';
 
 const CATEGORIES = [
@@ -14,6 +17,20 @@ const CATEGORIES = [
   'Инструмент разработчика',
   'Другое',
 ];
+
+function getFileType(name: string): 'pdf' | 'zip' | 'other' {
+  const ext = name.toLowerCase().split('.').pop();
+  if (ext === 'pdf') return 'pdf';
+  if (ext === 'zip') return 'zip';
+  return 'other';
+}
+
+interface AttachmentItem {
+  name: string;
+  uploading: boolean;
+  url?: string;
+  error?: boolean;
+}
 
 interface FormValues {
   title: string;
@@ -28,8 +45,46 @@ interface FormValues {
 export const CreateProjectPage = observer(() => {
   const navigate = useNavigate();
   const [form] = Form.useForm<FormValues>();
+  const [attachments, setAttachments] = useState<AttachmentItem[]>([]);
+
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? []);
+    e.target.value = '';
+
+    for (const file of files) {
+      if (file.size > 20 * 1024 * 1024) {
+        message.error(`${file.name}: слишком большой (макс 20MB)`);
+        continue;
+      }
+      const idx = attachments.length;
+      setAttachments(prev => [...prev, { name: file.name, uploading: true }]);
+      try {
+        const res = await uploadAttachment(file);
+        setAttachments(prev =>
+          prev.map((a, i) =>
+            i === idx ? { ...a, uploading: false, url: res.url } : a
+          )
+        );
+      } catch {
+        message.error(`Не удалось загрузить ${file.name}`);
+        setAttachments(prev =>
+          prev.map((a, i) =>
+            i === idx ? { ...a, uploading: false, error: true } : a
+          )
+        );
+      }
+    }
+  };
 
   const handleSubmit = async (values: FormValues) => {
+    const ready = attachments
+      .filter(a => a.url)
+      .map(a => ({
+        name: a.name,
+        url: a.url!,
+        type: getFileType(a.name),
+      }));
+
     await projectDetailModel.createProject({
       title: values.title,
       description: values.description,
@@ -38,28 +93,30 @@ export const CreateProjectPage = observer(() => {
       tags: values.tags ?? [],
       url: values.url,
       testingSlots: values.testingSlots,
+      attachments: ready,
     });
   };
 
   const handleReset = () => {
     projectDetailModel.resetCreate();
     form.resetFields();
+    setAttachments([]);
   };
 
   if (projectDetailModel.createSuccess && projectDetailModel.createdProjectId) {
-    const projectId = projectDetailModel.createdProjectId;
+    const pid = projectDetailModel.createdProjectId;
     return (
       <div className={styles.page}>
         <div className={styles.successCard}>
           <div className={styles.successIcon}>✓</div>
           <h2 className={styles.successTitle}>Продукт опубликован!</h2>
           <p className={styles.successText}>
-            Ваш продукт успешно размещён и теперь доступен тестировщикам.
+            Ваш продукт доступен тестировщикам.
           </p>
           <div className={styles.successActions}>
             <Button
               className={styles.viewBtn}
-              onClick={() => navigate(`/projects/${projectId}`)}
+              onClick={() => navigate(`/projects/${pid}`)}
             >
               Посмотреть продукт
             </Button>
@@ -87,7 +144,7 @@ export const CreateProjectPage = observer(() => {
           <Form.Item
             name="title"
             label="Название продукта"
-            rules={[{ required: true, message: 'Введите название продукта' }]}
+            rules={[{ required: true, message: 'Введите название' }]}
           >
             <Input placeholder="TaskFlow — менеджер задач" />
           </Form.Item>
@@ -116,9 +173,9 @@ export const CreateProjectPage = observer(() => {
             rules={[{ required: true, message: 'Выберите категорию' }]}
           >
             <Select placeholder="Выберите категорию">
-              {CATEGORIES.map(cat => (
-                <Select.Option key={cat} value={cat}>
-                  {cat}
+              {CATEGORIES.map(c => (
+                <Select.Option key={c} value={c}>
+                  {c}
                 </Select.Option>
               ))}
             </Select>
@@ -138,10 +195,58 @@ export const CreateProjectPage = observer(() => {
 
           <Form.Item
             name="testingSlots"
-            label="Количество мест для тестировщиков"
-            rules={[{ required: true, message: 'Укажите количество мест' }]}
+            label="Мест для тестировщиков"
+            rules={[{ required: true, message: 'Укажите количество' }]}
           >
             <InputNumber min={1} max={100} style={{ width: '100%' }} />
+          </Form.Item>
+
+          {/* Загрузка файлов */}
+          <Form.Item label="Материалы (PDF, ZIP, изображения — до 20MB)">
+            <div className={styles.uploadArea}>
+              <label className={styles.uploadLabel}>
+                <input
+                  type="file"
+                  multiple
+                  accept=".pdf,.zip,.png,.jpg,.jpeg,.gif,.webp"
+                  className={styles.fileInput}
+                  onChange={handleFileSelect}
+                />
+                <span className={styles.uploadIcon}>📎</span>
+                <span className={styles.uploadText}>
+                  Нажмите или перетащите файлы
+                </span>
+                <span className={styles.uploadHint}>
+                  PDF, ZIP, PNG, JPG, GIF, WEBP
+                </span>
+              </label>
+
+              {attachments.length > 0 && (
+                <ul className={styles.fileList}>
+                  {attachments.map((a, i) => (
+                    <li key={i} className={styles.fileItem}>
+                      <span className={styles.fileName}>{a.name}</span>
+                      {a.uploading && (
+                        <span className={styles.fileStatus}>⏳</span>
+                      )}
+                      {a.url && <span className={styles.fileStatusOk}>✓</span>}
+                      {a.error && (
+                        <span className={styles.fileStatusErr}>✕</span>
+                      )}
+                      <button
+                        type="button"
+                        className={styles.fileRemove}
+                        onClick={() =>
+                          setAttachments(prev => prev.filter((_, j) => j !== i))
+                        }
+                      >
+                        ×
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </Form.Item>
 
           <Form.Item style={{ marginBottom: 0 }}>

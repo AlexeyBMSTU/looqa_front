@@ -57,7 +57,7 @@ export const LoginPage = () => {
                 <Form.Item name="remember" valuePropName="checked" noStyle>
                   <Checkbox>Запомнить меня</Checkbox>
                 </Form.Item>
-                <Link to="/">Забыли пароль?</Link>
+                <Link to="/forgot-password/">Забыли пароль?</Link>
               </Flex>
             </Form.Item>
 
